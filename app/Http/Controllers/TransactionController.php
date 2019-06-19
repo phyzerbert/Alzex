@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Transaction;
 use App\User;
 use App\Models\Category;
-use App\models\Account;
-use App\models\Accountgroup;
+use App\Models\Account;
+use App\Models\Accountgroup;
 
 class TransactionController extends Controller
 {
