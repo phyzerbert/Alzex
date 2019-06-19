@@ -34,8 +34,8 @@
             <ul class="nav nav-sidebar" data-nav-type="accordion">
                 <li class="nav-item"><a href="/" class="nav-link @if($page == 'home') active @endif"><i class="icon-home4"></i><span>Dashboard</span></a></li>
                 <li class="nav-item"><a href="/" class="nav-link @if($page == 'transaction') active @endif"><i class="icon-cash3"></i><span>Transaction</span></a></li>
-                <li class="nav-item"><a href="/" class="nav-link @if($page == 'account') active @endif"><i class="icon-credit-card"></i><span>Account</span></a></li>
-                <li class="nav-item"><a href="/" class="nav-link @if($page == 'category') active @endif"><i class="icon-tree7"></i><span>Category</span></a></li>
+                <li class="nav-item"><a href="{{route('account.index')}}" class="nav-link @if($page == 'account') active @endif"><i class="icon-credit-card"></i><span>Account</span></a></li>
+                <li class="nav-item"><a href="{{route('category.index')}}" class="nav-link @if($page == 'category') active @endif"><i class="icon-tree7"></i><span>Category</span></a></li>
                 <li class="nav-item"><a href="{{route('users.index')}}" class="nav-link @if($page == 'user') active @endif"><i class="icon-users2"></i><span>User</span></a></li>
                 {{-- <li class="nav-item nav-item-submenu">
                     <a href="form_checkboxes_radios.html#" class="nav-link"><i class="icon-copy"></i> <span>Layouts</span></a>
