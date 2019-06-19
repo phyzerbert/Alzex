@@ -36,8 +36,8 @@ class CategoryController extends Controller
         $item = Category::find($request->get("id"));
         $item->name = $request->get("name");
         $item->comment = $request->get("comment");
-        $user->save();
-        return response()->json("success");
+        $item->save();
+        return back()->with('success', 'Updated Successfully');
     }
 
     public function create(Request $request){
@@ -54,7 +54,7 @@ class CategoryController extends Controller
     }
 
     public function delete($id){
-        $user = User::find($id);
+        $user = Category::find($id);
         $user->delete();
         return back()->with("success", "Deleted Successfully");
     }

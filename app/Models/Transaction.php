@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     protected $fillable = [
-        'user_id', 'category_id', 'from', 'to', 'amount', 'description', 'tran_date', 'status',
+        'type', 'user_id', 'category_id', 'from', 'to', 'amount', 'description', 'timestamp', 'status', 'attachment',
     ];
 
     public function user(){
@@ -18,11 +18,11 @@ class Transaction extends Model
         return $this->belongsTo('App\Models\Category');
     }
 
-    public function From(){
+    public function account(){
         return $this->belongsTo('App\Models\Account', 'from');
     }
 
-    public function To(){
+    public function target(){
         return $this->belongsTo('App\Models\Account', 'to');
     }
 }

@@ -28,34 +28,34 @@
         <div class="container content">
             <div class="card">
                 <div class="card-header">
-                    <button type="button" class="btn btn-primary float-right" id="btn-add"><i class="icon-plus-circle2 mr-2"></i> Add New</button>
+                    <button type="button" class="btn btn-primary float-right" id="btn-add"><i class="icon-user-plus mr-2"></i> Add New</button>
                 </div>
-                <div class="card-body">                    
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-hover">
-                            <thead>
-                                <tr class="bg-blue">
-                                    <th style="width:30px;">#</th>
-                                    <th>Name</th>
-                                    <th>Comment</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>                                
-                                @foreach ($data as $item)
-                                    <tr>
-                                        <td>{{ $loop->index + 1 }}</td>
-                                        <td class="name">{{$item->name}}</td>
-                                        <td class="comment">{{$item->comment}}</td>
-                                        <td class="py-1">
-                                            <a href="#" class="btn bg-blue btn-icon rounded-round btn-edit" data-id="{{$item->id}}"  data-popup="tooltip" title="Edit" data-placement="top"><i class="icon-pencil7"></i></a>
-                                            <a href="{{route('category.delete', $item->id)}}" class="btn bg-danger text-pink-800 btn-icon rounded-round ml-2" data-popup="tooltip" title="Delete" data-placement="top" onclick="return window.confirm('Are you sure?')"><i class="icon-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="card-body sidebar-light">
+                    <ul class="nav nav-sidebar" data-nav-type="collapsible">
+                        @foreach ($data as $item)
+                            @php
+                                $children = $item->children;
+                                $parent = $item->parent;
+                                // dump($children);
+                                // dump($parent);
+                            @endphp
+                            @if (!$parent && $children->isEmpty())
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link"><i class="icon-arrow-right15"></i>{{$item->name}}</a>
+                                </li>
+                            @endif
+                            @if (!$parent && $children->isNotEmpty())
+                                <li class="nav-item nav-item-submenu">                                    
+                                    <a href="#" class="nav-link"><i class="icon-arrow-right15"></i> {{$item->name}}</a>
+                                    <ul class="nav nav-group-sub">
+                                        @foreach ($children as $child)
+                                            <li class="nav-item"><a href="#" class="nav-link"><i class="icon-arrow-right15"></i> {{$child->name}}</a></li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>                
@@ -77,7 +77,7 @@
                             <input class="form-control" type="text" name="name" placeholder="Name">
                         </div>
 
-                        {{-- <div class="form-group">
+                        <div class="form-group">
                             <label class="control-label">Parent</label>
                             <select class="form-control" name="parent">
                                 <option value="">Select parent category</option>
@@ -85,7 +85,7 @@
                                     <option value="{{$item->id}}">{{$item->name}}</option>                                    
                                 @endforeach
                             </select>
-                        </div> --}}
+                        </div>
 
                         <div class="form-group">
                             <label class="control-label">Comment</label>
@@ -107,22 +107,22 @@
                     <h4 class="modal-title">Edit Category</h4>
                     <button type="button" class="close" data-dismiss="modal">×</button>
                 </div>
-                <form action="{{route('category.edit')}}" id="edit_form" method="post">
+                <form action="" id="edit_form" method="post">
                     @csrf
                     <div class="modal-body">
-                        <input type="hidden" class="id" name="id" />                    
+                        <input type="hidden" name="id" id="edit_id" />                    
                         <div class="form-group">
                             <label class="control-label">Name</label>
-                            <input class="form-control name" type="text" name="name" placeholder="Name">
+                            <input class="form-control" type="text" name="name" id="edit_name" placeholder="Name">
                         </div>
                         <div class="form-group">
                             <label class="control-label">Comment</label>
-                            <input class="form-control comment" type="text" name="comment" placeholder="Comment">
+                            <input class="form-control" type="text" name="comment" id="edit_phone" placeholder="Comment">
                         </div>
                     </div>
     
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary btn-submit"><i class="icon-paperplane"></i>&nbsp;Save</button>
+                        <button type="button" id="btn_update" class="btn btn-primary btn-submit"><i class="icon-paperplane"></i>&nbsp;Save</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="icon-close2"></i>&nbsp;Close</button>
                     </div>
                 </form>
@@ -143,14 +143,14 @@
 
 
         $(".btn-edit").click(function(){
-            let id = $(this).data("id");
-            let name = $(this).parents('tr').find(".name").text().trim();
-            let comment = $(this).parents('tr').find(".comment").text().trim();
-            
+            let user_id = $(this).attr("data-id");
+            let username = $(this).parents('tr').find(".username").text().trim();
+            let phone = $(this).parents('tr').find(".phone").text().trim();
+
             $("#edit_form input.form-control").val('');
-            $("#edit_form .id").val(id);
-            $("#edit_form .name").val(name);
-            $("#edit_form .comment").val(comment);
+            $("#editModal #edit_id").val(user_id);
+            $("#editModal #edit_name").val(username);
+            $("#editModal #edit_phone").val(phone);
 
             $("#editModal").modal();
         });

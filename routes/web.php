@@ -42,3 +42,14 @@ Route::post('/accountgroup/create', 'AccountController@create_group')->name('acc
 Route::post('/accountgroup/edit', 'AccountController@edit_group')->name('accountgroup.edit');
 Route::get('/accountgroup/delete/{id}', 'AccountController@delete_group')->name('accountgroup.delete');
 
+
+
+
+Route::any('/transaction/index', 'TransactionController@index')->name('transaction.index');
+Route::get('/transaction/create', 'TransactionController@create')->name('transaction.create');
+Route::post('/transaction/expense', 'TransactionController@expense')->name('transaction.expense');
+Route::post('/transaction/incoming', 'TransactionController@incoming')->name('transaction.incoming');
+Route::post('/transaction/transfer', 'TransactionController@transfer')->name('transaction.transfer');
+Route::get('/transaction/edit', 'TransactionController@edit')->name('transaction.edit');
+Route::post('/transaction/update', 'TransactionController@update')->name('transaction.update');
+Route::get('/transaction/delete/{id}', 'TransactionController@delete')->name('transaction.delete');

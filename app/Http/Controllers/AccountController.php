@@ -87,4 +87,9 @@ class AccountController extends Controller
         return back()->with("success", "Deleted Successfully");
     }
 
+    public function delete_group($id){
+        $item = Accountgroup::find($id);
+        $item->delete();
+        return back()->with("success", "Deleted Successfully");
+    }
 }
