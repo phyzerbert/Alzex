@@ -17,6 +17,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/verify', 'VerifyController@show')->name('verify');
+Route::post('/verify', 'VerifyController@verify')->name('verify');
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', 'HomeController@profile')->name('profile');
 

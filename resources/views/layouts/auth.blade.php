@@ -15,7 +15,7 @@
 	<link href="{{asset('master/assets/css/components.min.css')}}" rel="stylesheet" type="text/css">
 	<link href="{{asset('master/assets/css/colors.min.css')}}" rel="stylesheet" type="text/css">
 	<!-- /global stylesheets -->
-
+	@yield('style')
 	<!-- Core JS files -->
 	<script src="{{asset('master/global_assets/js/main/jquery.min.js')}}"></script>
 	<script src="{{asset('master/global_assets/js/main/bootstrap.bundle.min.js')}}"></script>
