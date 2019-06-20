@@ -43,7 +43,7 @@
         
         <div class="content">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header mb-2">
                     @include('transaction.filter')
                     <a href="{{route('transaction.create')}}" class="btn btn-primary btn-sm float-right" id="btn-add"><i class="icon-plus-circle2 mr-2"></i> Add New</a>
                 </div>
