@@ -95,16 +95,10 @@
                     </div>
                 </div>
             </div>
+            {{-- User Chart --}}
             <div class="card">
                 <div class="card-header header-elements-inline">
-                    <h5 class="card-title">Overview</h5>
-                    <div class="form-search">
-                        <form action="" class="form-inline" method="post">
-                            @csrf
-                            <input type="text" name="period" id="overview-period" class="form-control form-control-sm period" value="{{$period}}" placeholder="Timestamp" autocomplete="off" style="min-width:200px;">
-                            <button type="submit" class="btn btn-primary btn-sm ml-2"><i class="icon-search4"></i> Search</button>
-                        </form>
-                    </div>
+                    <h5 class="card-title">Users Overview</h5>
                     <div class="header-elements">
                         <div class="list-icons">
                             <a class="list-icons-item" data-action="collapse"></a>
@@ -131,6 +125,36 @@
                     </div>
                 </div>
             </div>
+            {{-- Category Chart --}}
+            <div class="card">
+                <div class="card-header header-elements-inline">
+                    <h5 class="card-title">Categories Overview</h5>
+                    <div class="header-elements">
+                        <div class="list-icons">
+                            <a class="list-icons-item" data-action="collapse"></a>
+                            <a class="list-icons-item" data-action="reload"></a>
+                            <a class="list-icons-item" data-action="remove"></a>
+                        </div>
+                    </div>
+                </div>
+                @php
+                    $category_key_array = $category_expense_array = $category_incoming_array = array();
+                    for ($i=0; $i < count($search_categories); $i++) { 
+                        $item = \App\Models\Category::find($search_categories[$i]);
+                        array_push($category_key_array, $item->name);
+                        $category_expense = $item->transactions()->where('type', 1)->whereBetween('timestamp', [$from, $to])->sum('amount');
+                        $category_incoming = $item->transactions()->where('type', 2)->whereBetween('timestamp', [$from, $to])->sum('amount');
+                        array_push($category_expense_array, $category_expense);
+                        array_push($category_incoming_array, $category_incoming);
+                    }
+                @endphp
+
+                <div class="card-body">
+                    <div class="chart-container">
+                        <div class="chart has-fixed-height" id="category_chart"></div>
+                    </div>
+                </div>
+            </div>
         </div>                
     </div>                
 @endsection
@@ -140,7 +164,7 @@
     <script src="{{asset('master/global_assets/js/plugins/visualization/echarts/echarts.min.js')}}"></script>
     <script src="{{asset('master/assets/js/app.js')}}"></script>
     <script>
-        var EchartsAreas = function() {
+        var Chart_overview = function() {
 
             var dashboard_chart = function() {
                 if (typeof echarts == 'undefined') {
@@ -311,7 +335,7 @@
             }
         }();
 
-        var EchartsColumnsWaterfalls = function() {
+        var Chart_user = function() {
 
             var _columnsWaterfallsExamples = function() {
                 if (typeof echarts == 'undefined') {
@@ -490,13 +514,193 @@
             }
         }();
 
+        var Chart_category = function() {
 
-            // Initialize module
-            // ------------------------------
+            var category_chart = function() {
+                if (typeof echarts == 'undefined') {
+                    console.warn('Warning - echarts.min.js is not loaded.');
+                    return;
+                }
+
+                // Define elements
+                var category_element = document.getElementById('category_chart');
+
+                // Basic columns chart
+                if (category_element) {
+
+                    // Initialize chart
+                    var columns_category = echarts.init(category_element);
+
+                    // Options
+                    columns_category.setOption({
+
+                        // Define colors
+                        color: ['#2ec7c9','#b6a2de','#5ab1ef','#ffb980','#d87a80'],
+
+                        // Global text styles
+                        textStyle: {
+                            fontFamily: 'Roboto, Arial, Verdana, sans-serif',
+                            fontSize: 13
+                        },
+
+                        // Chart animation duration
+                        animationDuration: 750,
+
+                        // Setup grid
+                        grid: {
+                            left: 0,
+                            right: 40,
+                            top: 35,
+                            bottom: 0,
+                            containLabel: true
+                        },
+
+                        // Add legend
+                        legend: {
+                            data: ['Expense', 'Incoming'],
+                            itemHeight: 8,
+                            itemGap: 20,
+                            textStyle: {
+                                padding: [0, 5]
+                            }
+                        },
+
+                        // Add tooltip
+                        tooltip: {
+                            trigger: 'axis',
+                            backgroundColor: 'rgba(0,0,0,0.75)',
+                            padding: [10, 15],
+                            textStyle: {
+                                fontSize: 13,
+                                fontFamily: 'Roboto, sans-serif'
+                            }
+                        },
+
+                        // Horizontal axis
+                        xAxis: [{
+                            type: 'category',
+                            data: {!! json_encode($category_key_array) !!},
+                            axisLabel: {
+                                color: '#333'
+                            },
+                            axisLine: {
+                                lineStyle: {
+                                    color: '#999'
+                                }
+                            },
+                            splitLine: {
+                                show: true,
+                                lineStyle: {
+                                    color: '#eee',
+                                    type: 'dashed'
+                                }
+                            }
+                        }],
+
+                        // Vertical axis
+                        yAxis: [{
+                            type: 'value',
+                            axisLabel: {
+                                color: '#333'
+                            },
+                            axisLine: {
+                                lineStyle: {
+                                    color: '#999'
+                                }
+                            },
+                            splitLine: {
+                                lineStyle: {
+                                    color: ['#eee']
+                                }
+                            },
+                            splitArea: {
+                                show: true,
+                                areaStyle: {
+                                    color: ['rgba(250,250,250,0.1)', 'rgba(0,0,0,0.01)']
+                                }
+                            }
+                        }],
+
+                        // Add series
+                        series: [
+                            {
+                                name: 'Expense',
+                                type: 'bar',
+                                data: {!! json_encode($category_expense_array) !!},
+                                itemStyle: {
+                                    normal: {
+                                        label: {
+                                            show: true,
+                                            position: 'top',
+                                            textStyle: {
+                                                fontWeight: 500
+                                            }
+                                        }
+                                    }
+                                },
+                                markLine: {
+                                    data: [{type: 'average', name: 'Average'}]
+                                }
+                            },
+                            {
+                                name: 'Incoming',
+                                type: 'bar',
+                                data: {!! json_encode($category_incoming_array) !!},
+                                itemStyle: {
+                                    normal: {
+                                        label: {
+                                            show: true,
+                                            position: 'top',
+                                            textStyle: {
+                                                fontWeight: 500
+                                            }
+                                        }
+                                    }
+                                },
+                                markLine: {
+                                    data: [{type: 'average', name: 'Average'}]
+                                }
+                            }
+                        ]
+                    });
+                }
+
+                var triggerChartResize = function() {
+                    category_element && columns_category.resize();
+                };
+
+                // On sidebar width change
+                $(document).on('click', '.sidebar-control', function() {
+                    setTimeout(function () {
+                        triggerChartResize();
+                    }, 0);
+                });
+
+                // On window resize
+                var resizeCharts;
+                window.onresize = function () {
+                    clearTimeout(resizeCharts);
+                    resizeCharts = setTimeout(function () {
+                        triggerChartResize();
+                    }, 200);
+                };
+            };
+
+            return {
+                init: function() {
+                    category_chart();
+                }
+            }
+        }();
+
+
+
+        
 
         document.addEventListener('DOMContentLoaded', function() {
-            EchartsAreas.init();
-            EchartsColumnsWaterfalls.init();
+            Chart_overview.init();
+            Chart_user.init();
+            Chart_category.init();
         });
 
     </script>

@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Nexmo;
+use Carbon\Carbon;
+
 use App\User;
+use App\Models\Transaction;
+use App\Models\Category;
 
 class HomeController extends Controller
 {
@@ -27,12 +31,16 @@ class HomeController extends Controller
     public function index(Request $request) {        
         config(['site.page' => 'home']);
         $search_users = User::pluck('id')->toArray();
-        $from = $to = $period = '';        
+        $search_categories = Category::pluck('id')->toArray();
+        
+        $from = Carbon::now()->startOfMonth()->format('Y-m-d');
+        $to = Carbon::now()->endOfMonth()->format('Y-m-d');
+        $period = '';        
         if ($request->get('period') != ""){   
             $period = $request->get('period');
             $from = substr($period, 0, 10);
             $to = substr($period, 14, 10);
         }
-        return view('home', compact('period', 'search_users', 'from', 'to'));
+        return view('home', compact('period', 'search_users', 'search_categories', 'from', 'to'));
     } 
 }

@@ -31,10 +31,9 @@ class TransactionController extends Controller
         config(['site.page' => 'transaction']);
         $categories = Category::all();
         $accountgroups = Accountgroup::all();
-
+        
         $mod = new Transaction();
         $mod1 = new Transaction();
-
         $category = $account = $user = $type = $period = '';
 
         if ($request->get('type') != ""){
