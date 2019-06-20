@@ -27,7 +27,27 @@
 
         <ul class="navbar-nav">
             <li class="nav-item dropdown dropdown-user">
-                <a href="form_checkboxes_radios.html#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
+                @php $locale = session()->get('locale'); @endphp
+                <a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" style="margin-top:8px;" data-toggle="dropdown">                    
+                    @switch($locale)
+                        @case('en')
+                            <img src="{{asset('images/lang/en.png')}}" width="30px">&nbsp;&nbsp;English
+                            @break
+                        @case('es')
+                            <img src="{{asset('images/lang/es.png')}}" width="30px">&nbsp;&nbsp;Spanish
+                            @break
+                        @default
+                            <img src="{{asset('images/lang/en.png')}}" width="30px">&nbsp;&nbsp;English
+                    @endswitch
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="{{route('lang', 'en')}}"><img src="{{asset('images/lang/en.png')}}" width="30" height="30"> English</a>
+                    <a class="dropdown-item" href="{{route('lang', 'es')}}"><img src="{{asset('images/lang/es.png')}}" width="30" height="30"> Spanish</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown dropdown-user">
+                <a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
                     <img src="@if (isset(Auth::user()->picture)){{asset(Auth::user()->picture)}} @else {{asset('images/avatar128.png')}} @endif" class="rounded-circle mr-2" height="34" alt="">
                     <span>{{Auth::user()->name}}</span>
                 </a>
