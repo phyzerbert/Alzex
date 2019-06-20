@@ -25,12 +25,12 @@ class HomeController extends Controller
      */
     public function index(Request $request) {        
         config(['site.page' => 'home']);
-        $from = $to = '';        
+        $from = $to = $period = '';        
         if ($request->get('period') != ""){   
             $period = $request->get('period');
             $from = substr($period, 0, 10);
             $to = substr($period, 14, 10);
         }
-        return view('home', compact('from', 'to'));
+        return view('home', compact('period', 'from', 'to'));
     } 
 }

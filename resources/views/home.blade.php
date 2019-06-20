@@ -1,5 +1,7 @@
 @extends('layouts.master')
-
+@section('style')
+    <link rel="stylesheet" href="{{asset('master/global_assets/js/plugins/daterangepicker/daterangepicker.css')}}">
+@endsection
 @section('content')
     <div class="content-wrapper">
         <div class="page-header page-header-light">
@@ -43,6 +45,13 @@
             <div class="card">
                 <div class="card-header header-elements-inline">
                     <h5 class="card-title">Overview</h5>
+                    <div class="form-search">
+                        <form action="" class="form-inline" method="post">
+                            @csrf
+                            <input type="text" name="period" id="overview-period" class="form-control form-control-sm period" value="{{$period}}" placeholder="Timestamp" style="min-width:200px;">
+                            <button type="submit" class="btn btn-primary btn-sm ml-2"><i class="icon-search4"></i> Search</button>
+                        </form>
+                    </div>
                     <div class="header-elements">
                         <div class="list-icons">
                             <a class="list-icons-item" data-action="collapse"></a>
@@ -91,6 +100,7 @@
 @endsection
 
 @section('script')
+<script src="{{asset('master/global_assets/js/plugins/daterangepicker/jquery.daterangepicker.min.js')}}"></script>
     <script src="{{asset('master/global_assets/js/plugins/visualization/echarts/echarts.min.js')}}"></script>
     <script src="{{asset('master/assets/js/app.js')}}"></script>
     <script>
@@ -154,7 +164,7 @@
                         xAxis: [{
                             type: 'category',
                             boundaryGap: false,
-                            data: <?php echo json_encode($key_array); ?>,
+                            data: {!! json_encode($key_array) !!},
                             axisLabel: {
                                 color: '#333'
                             },
@@ -201,7 +211,7 @@
                             {
                                 name: 'Expense',
                                 type: 'line',
-                                data: <?php echo json_encode($expense_array); ?>,
+                                data: {!! json_encode($expense_array) !!},
                                 areaStyle: {
                                     normal: {
                                         opacity: 0.25
@@ -230,7 +240,7 @@
                                         opacity: 0.25
                                     }
                                 },
-                                data: <?php echo json_encode($incoming_array); ?>
+                                data: {!! json_encode($incoming_array) !!}
                             }
                         ]
                     });
@@ -278,5 +288,10 @@
             EchartsAreas.init();
         });
 
+    </script>
+    <script>
+        $(document).ready(function(){
+            $(".period").dateRangePicker();
+        });
     </script>
 @endsection
