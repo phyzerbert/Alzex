@@ -37,17 +37,6 @@
                 <li class="nav-item"><a href="{{route('account.index')}}" class="nav-link @if($page == 'account') active @endif"><i class="icon-credit-card"></i><span>{{__('page.account')}}</span></a></li>
                 <li class="nav-item"><a href="{{route('category.index')}}" class="nav-link @if($page == 'category') active @endif"><i class="icon-tree7"></i><span>{{__('page.category')}}</span></a></li>
                 <li class="nav-item"><a href="{{route('users.index')}}" class="nav-link @if($page == 'user') active @endif"><i class="icon-users2"></i><span>{{__('page.user')}}</span></a></li>
-                {{-- <li class="nav-item nav-item-submenu">
-                    <a href="form_checkboxes_radios.html#" class="nav-link"><i class="icon-copy"></i> <span>Layouts</span></a>
-                    <ul class="nav nav-group-sub" data-submenu-title="Layouts">
-                        <li class="nav-item"><a href="index.html" class="nav-link active">Default layout</a></li>
-                        <li class="nav-item"><a href="../../../../layout_2/LTR/default/full/index.html" class="nav-link">Layout 2</a></li>
-                        <li class="nav-item"><a href="../../../../layout_3/LTR/default/full/index.html" class="nav-link">Layout 3</a></li>
-                        <li class="nav-item"><a href="../../../../layout_4/LTR/default/full/index.html" class="nav-link">Layout 4</a></li>
-                        <li class="nav-item"><a href="../../../../layout_5/LTR/default/full/index.html" class="nav-link">Layout 5</a></li>
-                        <li class="nav-item"><a href="http://demo.interface.club/limitless/demo/bs4/Template/layout_6/LTR/default/full/index.html" class="nav-link disabled">Layout 6 <span class="badge bg-transparent align-self-center ml-auto">Coming soon</span></a></li>
-                    </ul>
-                </li> --}}
             </ul>
         </div>
     </div>    
