@@ -23,7 +23,14 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index() {
-        return view('home');
+    public function index(Request $request) {        
+        config(['site.page' => 'home']);
+        $from = $to = '';        
+        if ($request->get('period') != ""){   
+            $period = $request->get('period');
+            $from = substr($period, 0, 10);
+            $to = substr($period, 14, 10);
+        }
+        return view('home', compact('from', 'to'));
     } 
 }
