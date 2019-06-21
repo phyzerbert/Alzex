@@ -111,7 +111,7 @@ class TransactionController extends Controller
         ]);
 
         $account->decrement('balance', $request->get('amount'));
-        return back()->with('success', 'Created Successfully');
+        return back()->with('success', __('page.created_successfully'));
     }
 
     public function incoming(Request $request){
@@ -143,7 +143,7 @@ class TransactionController extends Controller
         $account = Account::find($request->get('account'));
         $account->increment('balance', $request->get('amount'));
 
-        return back()->with('success', 'Created Successfully');
+        return back()->with('success', __('page.created_successfully'));
     }
 
     public function transfer(Request $request){
@@ -185,7 +185,7 @@ class TransactionController extends Controller
         $account->decrement('balance', $request->get('amount'));
         $target->increment('balance', $request->get('amount'));
 
-        return back()->with('success', 'Created Successfully');
+        return back()->with('success', __('page.created_successfully'));
     }
 
     public function edit(Request $request, $id){
