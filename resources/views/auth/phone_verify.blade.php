@@ -54,7 +54,7 @@
     <script src="{{asset('master/assets/js/login.js')}}"></script>
     <script>
 
-        let countDown = 120,
+        let countDown = 300,
 
         x = setInterval(function() {
 

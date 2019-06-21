@@ -162,7 +162,6 @@
 @section('script')
 <script src="{{asset('master/global_assets/js/plugins/daterangepicker/jquery.daterangepicker.min.js')}}"></script>
     <script src="{{asset('master/global_assets/js/plugins/visualization/echarts/echarts.min.js')}}"></script>
-    <script src="{{asset('master/assets/js/app.js')}}"></script>
     <script>
         var Chart_overview = function() {
 
