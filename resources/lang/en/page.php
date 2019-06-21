@@ -12,7 +12,7 @@ return [
 
     // ********  Verify Phone Number Page  ********
     'verification_phone_number' => 'Verification Phone Number',
-    'please_enter_your_verification_code.' => 'Please enter your verification code',
+    'please_enter_your_verification_code' => 'Please enter your verification code.',
     'verification_code' => 'Verification Code',
     'verify' => 'Verify',
     
