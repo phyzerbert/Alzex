@@ -66,12 +66,11 @@ class TransactionController extends Controller
             $mod1 = $mod1->whereBetween('timestamp', [$from, $to]);
         }
 
-        $data = $mod->orderBy('created_at', 'desc')->paginate(15);
+        $pagesize = $request->session()->get('pagesize');
+        if(!$pagesize){$pagesize = 15;}
+        $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
         $expenses = $mod->where('type', 1)->sum('amount');
         $incomes = $mod->where('type', 2)->sum('amount');
-        $pagesize = $request->session()->get('pagesize');
-        if(!$pagesize){$pagesize = 10;}
-        $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
         return view('transaction.index', compact('data', 'expenses', 'incomes', 'categories', 'accountgroups', 'users', 'type', 'user', 'category', 'account', 'period', 'pagesize'));
     }
 
@@ -271,6 +270,21 @@ class TransactionController extends Controller
 
     public function delete($id){
         $item = Transaction::find($id);
+
+        $type = $item->type;
+        if($type == 1){
+            $account = $item->account;
+            $account->increment('balance', $item->amount);
+        }else if($type == 2){
+            $target = $item->target;
+            $target->decrement('balance', $item->amount);
+        }else if($type == 3){
+            $account = $item->account;
+            $account->increment('balance', $item->amount);
+            $target = $item->target;
+            $target->decrement('balance', $item->amount);
+        }
+
         $item->delete();
         return back()->with("success", "Deleted Successfully");
     }
