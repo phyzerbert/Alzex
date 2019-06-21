@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 
+use Auth;
 use Hash;
 
 class UserController extends Controller
@@ -46,17 +47,14 @@ class UserController extends Controller
     public function updateuser(Request $request){
         $request->validate([
             'name'=>'required',
-            'phone'=>'required',
+            'phone_number'=>'required',
         ]);
-        $user = User::find($request->get("id"));
+        $user = Auth::user();
         $user->name = $request->get("name");
-        $user->first_name = $request->get("first_name");
-        $user->last_name = $request->get("last_name");
-        $user->phone = $request->get("phone");
-        $user->date_of_birth = $request->get("birthday");
+        $user->phone_number = $request->get("phone");
 
-        if($request->get('newpassword') != ''){
-            $user->password = Hash::make($request->get('newpassword'));
+        if($request->get('password') != ''){
+            $user->password = Hash::make($request->get('password'));
         }
         if($request->has("picture")){
             $picture = request()->file('picture');

@@ -17,7 +17,7 @@ class CreateAccountsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('comment')->nullable();
-            $table->float('balance', 8, 2)->default(0);
+            $table->float('balance', 14, 2)->default(0);
             $table->integer('group_id')->default(0);
             $table->timestamps();
         });
