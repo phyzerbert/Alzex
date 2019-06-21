@@ -5,7 +5,7 @@
         <div class="page-header page-header-light">
             <div class="page-header-content header-elements-md-inline">
                 <div class="page-title d-flex">
-                    <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Home</span> - Account</h4>
+                    <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{{__('page.home')}}</span> - {{__('page.account')}}</h4>
                     <a href="index.html#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
                 </div>
 
@@ -18,8 +18,8 @@
             <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
                 <div class="d-flex">
                     <div class="breadcrumb">
-                        <a href="{{url('/')}}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-                        <span class="breadcrumb-item active">Account</span>
+                        <a href="{{url('/')}}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> {{__('page.home')}}</a>
+                        <span class="breadcrumb-item active">{{__('page.account')}}</span>
                     </div>
                 </div>
             </div>
@@ -28,14 +28,14 @@
         <div class="container content">
             <div class="card">
                 <div class="card-header">
-                    <button type="button" class="btn btn-primary float-right" id="btn-add"><i class="icon-plus-circle2 mr-2"></i> Add Account</button>
-                    <button type="button" class="btn btn-info float-right mr-2" id="btn-group"><i class="icon-folder-plus2 mr-2"></i> Add Group</button>
+                    <button type="button" class="btn btn-primary float-right" id="btn-add"><i class="icon-plus-circle2 mr-2"></i> {{__('page.add_account')}}</button>
+                    <button type="button" class="btn btn-info float-right mr-2" id="btn-group"><i class="icon-folder-plus2 mr-2"></i> {{__('page.add_group')}}</button>
                 </div>
                 <div class="card-body sidebar-light">
                     <div class="row bg-blue-400 p-2">
-                        <div class="col-md-4" style="padding-left:67px">Name</div>
-                        <div class="col-md-6" style="padding-left:48px">Comment</div>
-                        <div class="col-md-2" style="padding-left:38px">Action</div>
+                        <div class="col-md-4" style="padding-left:67px">{{__('page.name')}}</div>
+                        <div class="col-md-6" style="padding-left:48px">{{__('page.comment')}}</div>
+                        <div class="col-md-2" style="padding-left:38px">{{__('page.action')}}</div>
                     </div>
                     <ul class="nav nav-sidebar" data-nav-type="collapsible">
                         @foreach ($data as $item)
@@ -79,19 +79,19 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add New Account</h4>
+                    <h4 class="modal-title">{{__('page.add_new_account')}}</h4>
                     <button type="button" class="close" data-dismiss="modal">×</button>
                 </div>
                 <form action="{{route('account.create')}}" id="create_form" method="post">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="control-label">Name</label>
-                            <input class="form-control" type="text" name="name" placeholder="Name">
+                            <label class="control-label">{{__('page.name')}}</label>
+                            <input class="form-control" type="text" name="name" placeholder="{{__('page.name')}}">
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label">Group</label>
+                            <label class="control-label">{{__('page.group')}}</label>
                             <select class="form-control" name="group">
                                 <option value="">Select a group</option>
                                 @foreach ($data as $item)
@@ -101,13 +101,13 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label">Comment</label>
-                            <input class="form-control" type="text" name="comment" placeholder="Comment">
+                            <label class="control-label">{{__('page.comment')}}</label>
+                            <input class="form-control" type="text" name="comment" placeholder="{{__('page.comment')}}">
                         </div>
                     </div>    
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary btn-submit"><i class="icon-paperplane"></i>&nbsp;Save</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="icon-close2"></i>&nbsp;Close</button>
+                        <button type="submit" class="btn btn-primary btn-submit"><i class="icon-paperplane"></i>&nbsp;{{__('page.save')}}</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="icon-close2"></i>&nbsp;{{__('page.close')}}</button>
                     </div>
                 </form>
             </div>
@@ -117,24 +117,24 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add New Group</h4>
+                    <h4 class="modal-title">{{__('page.add_new_group')}}</h4>
                     <button type="button" class="close" data-dismiss="modal">×</button>
                 </div>
                 <form action="{{route('accountgroup.create')}}" id="addgroup_form" method="post">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="control-label">Name</label>
-                            <input class="form-control" type="text" name="name" placeholder="Name">
+                            <label class="control-label">{{__('page.name')}}</label>
+                            <input class="form-control" type="text" name="name" placeholder="{{__('page.name')}}">
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Comment</label>
-                            <input class="form-control" type="text" name="comment" placeholder="Comment">
+                            <label class="control-label">{{__('page.comment')}}</label>
+                            <input class="form-control" type="text" name="comment" placeholder="{{__('page.comment')}}">
                         </div>
                     </div>    
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary btn-submit"><i class="icon-paperplane"></i>&nbsp;Save</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="icon-close2"></i>&nbsp;Close</button>
+                        <button type="submit" class="btn btn-primary btn-submit"><i class="icon-paperplane"></i>&nbsp;{{__('page.save')}}</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="icon-close2"></i>&nbsp;{{__('page.close')}}</button>
                     </div>
                 </form>
             </div>
@@ -144,7 +144,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit Account</h4>
+                    <h4 class="modal-title">{{__('page.edit_account')}}</h4>
                     <button type="button" class="close" data-dismiss="modal">×</button>
                 </div>
                 <form action="{{route('account.edit')}}" id="edit_form" method="post">
@@ -152,11 +152,11 @@
                     <div class="modal-body">
                         <input type="hidden" name="id" class="id" />                    
                         <div class="form-group">
-                            <label class="control-label">Name</label>
+                            <label class="control-label">{{__('page.name')}}</label>
                             <input class="form-control name" type="text" name="name" placeholder="Name">
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Group</label>
+                            <label class="control-label">{{__('page.group')}}</label>
                             <select class="form-control group" name="group">
                                 <option value="">Select a group</option>
                                 @foreach ($data as $item)
@@ -165,14 +165,14 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Comment</label>
-                            <input class="form-control comment" type="text" name="comment" placeholder="Comment">
+                            <label class="control-label">{{__('page.comment')}}</label>
+                            <input class="form-control comment" type="text" name="comment" placeholder="{{__('page.Comment')}}">
                         </div>
                     </div>
     
                     <div class="modal-footer">
-                        <button type="submit" id="btn_update" class="btn btn-primary btn-submit"><i class="icon-paperplane"></i>&nbsp;Save</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="icon-close2"></i>&nbsp;Close</button>
+                        <button type="submit" id="btn_update" class="btn btn-primary btn-submit"><i class="icon-paperplane"></i>&nbsp;{{__('page.save')}}</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="icon-close2"></i>&nbsp;{{__('page.close')}}</button>
                     </div>
                 </form>
             </div>
@@ -183,7 +183,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit Group</h4>
+                    <h4 class="modal-title">{{__('page.edit_group')}}</h4>
                     <button type="button" class="close" data-dismiss="modal">×</button>
                 </div>
                 <form action="{{route('accountgroup.edit')}}" id="edit_group_form" method="post">
@@ -191,18 +191,18 @@
                     <div class="modal-body">
                         <input type="hidden" class="id" name="id" />                    
                         <div class="form-group">
-                            <label class="control-label">Name</label>
-                            <input class="form-control name" type="text" name="name" placeholder="Name">
+                            <label class="control-label">{{__('page.name')}}</label>
+                            <input class="form-control name" type="text" name="name" placeholder="{{__('page.name')}}">
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Comment</label>
-                            <input class="form-control comment" type="text" name="comment" placeholder="Comment">
+                            <label class="control-label">{{__('page.comment')}}</label>
+                            <input class="form-control comment" type="text" name="comment" placeholder="{{__('page.comment')}}">
                         </div>
                     </div>
     
                     <div class="modal-footer">
-                        <button type="submit" id="btn_update" class="btn btn-primary btn-submit"><i class="icon-paperplane"></i>&nbsp;Save</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="icon-close2"></i>&nbsp;Close</button>
+                        <button type="submit" id="btn_update" class="btn btn-primary btn-submit"><i class="icon-paperplane"></i>&nbsp;{{__('page.save')}}</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="icon-close2"></i>&nbsp;{{__('page.close')}}</button>
                     </div>
                 </form>
             </div>

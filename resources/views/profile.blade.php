@@ -5,7 +5,7 @@
         <div class="page-header page-header-light">
             <div class="page-header-content header-elements-md-inline">
                 <div class="page-title d-flex">
-                    <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Home</span> - Profile</h4>
+                    <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{{__('page.home')}}</span> - {{__('page.profile')}}</h4>
                     <a href="index.html#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
                 </div>
 
@@ -18,8 +18,8 @@
             <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
                 <div class="d-flex">
                     <div class="breadcrumb">
-                        <a href="{{url('/')}}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-                        <span class="breadcrumb-item active">Profile</span>
+                        <a href="{{url('/')}}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> {{__('page.home')}}</a>
+                        <span class="breadcrumb-item active">{{__('page.profile')}}</span>
                     </div>
                 </div>
             </div>
@@ -52,11 +52,10 @@
 
                             <div class="card-body p-0">
                                 <ul class="nav nav-sidebar mb-2">
-                                    <li class="nav-item-header">Navigation</li>
                                     <li class="nav-item">
                                         <a href="#" class="nav-link active" data-toggle="tab">
                                             <i class="icon-user"></i>
-                                                My profile
+                                            {{__('page.my_profile')}}
                                         </a>
                                     </li>
                                     <li class="nav-item-divider"></li>
@@ -65,7 +64,7 @@
                                             onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
                                             <i class="icon-switch2"></i>
-                                            Logout
+                                            {{__('page.logout')}}
                                         </a>
                                     </li>
                                 </ul>
@@ -80,7 +79,7 @@
                     <div class="tab-pane fade active show" id="profile">
                         <div class="card">
                             <div class="card-header header-elements-inline">
-                                <h5 class="card-title">Account settings</h5>
+                                <h5 class="card-title">{{__('page.profile')}}</h5>
                                 <div class="header-elements">
                                     <div class="list-icons">
                                         <a class="list-icons-item" data-action="collapse"></a>
@@ -94,7 +93,7 @@
                                 <form action="{{route('updateuser')}}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
-                                        <label>Username</label>
+                                        <label>{{__('page.username')}}</label>
                                         <input type="text" name="name" value="{{$user->name}}" class="form-control">
                                         @error('name')
                                             <span class="form-text text-success">{{$message}}</span>
@@ -102,7 +101,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Phone Number</label>
+                                        <label>{{__('page.phone_number')}}</label>
                                         <input type="text" name="phone_number" value="{{$user->phone_number}}" class="form-control">
                                         @error('phone_number')
                                             <span class="form-text text-success">{{$message}}</span>
@@ -110,23 +109,23 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Profile Picture</label>
+                                        <label>{{__('page.profile_picture')}}</label>
                                         <input type="file" name="picture" class="form-input-styled" accept="image/*" data-fouc>
-                                        <span class="form-text text-muted">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
+                                        <span class="form-text text-muted">{{__('page.accepted_formats_image')}}</span>
                                     </div>
 
                                     <div class="form-group">
-                                        <label>New password</label>
-                                        <input type="password" name="password" placeholder="New password" class="form-control">
+                                        <label>{{__('page.new_password')}}</label>
+                                        <input type="password" name="password" placeholder="{{__('page.new_password')}}" class="form-control">
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Confirm password</label>
-                                        <input type="password" name="password_conform" placeholder="Confirm password" class="form-control">
+                                        <label>{{__('page.confirm_password')}}</label>
+                                        <input type="password" name="password_conform" placeholder="{{__('page.confirm_password')}}" class="form-control">
                                     </div>
 
                                     <div class="text-right">
-                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                        <button type="submit" class="btn btn-primary">{{__('page.save_changes')}}</button>
                                     </div>
                                 </form>
                             </div>

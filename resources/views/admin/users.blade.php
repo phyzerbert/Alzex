@@ -5,7 +5,7 @@
         <div class="page-header page-header-light">
             <div class="page-header-content header-elements-md-inline">
                 <div class="page-title d-flex">
-                    <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Home</span> - Users</h4>
+                    <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{{__('page.home')}}</span> - Users</h4>
                     <a href="index.html#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
                 </div>
 
@@ -18,7 +18,7 @@
             <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
                 <div class="d-flex">
                     <div class="breadcrumb">
-                        <a href="{{url('/')}}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+                        <a href="{{url('/')}}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> {{__('page.home')}}</a>
                         <span class="breadcrumb-item active">Users</span>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
         <div class="content">
             <div class="card">
                 <div class="card-header">
-                    <button type="button" class="btn btn-primary float-right" id="btn-add"><i class="icon-user-plus mr-2"></i> Add New</button>
+                    <button type="button" class="btn btn-primary float-right" id="btn-add"><i class="icon-user-plus mr-2"></i> {{__('page.add_new')}}</button>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -76,28 +76,28 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add New User</h4>
+                    <h4 class="modal-title">{{__('page.add_new_user')}}</h4>
                     <button type="button" class="close" data-dismiss="modal">×</button>
                 </div>
                 <form action="" id="create_form" method="post">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="control-label">User ID</label>
-                            <input class="form-control" type="text" name="name" id="name" placeholder="Username">
+                            <label class="control-label">{{__('page.username')}}</label>
+                            <input class="form-control" type="text" name="name" id="name" placeholder="{{__('page.username')}}">
                             <span id="name_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Phone Number</label>
-                            <input class="form-control" type="text" name="phone_number" id="phone" placeholder="Phone Number">
+                            <label class="control-label">{{__('page.phone_number')}}</label>
+                            <input class="form-control" type="text" name="phone_number" id="phone" placeholder="{{__('page.phone_number')}}">
                             <span id="phone_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Role</label>
+                            <label class="control-label">{{__('page.role')}}</label>
                             <select name="role" id="role" class="form-control">
                                 <option value="1">Admin</option>
                                 <option value="2">User</option>
@@ -107,23 +107,23 @@
                             </span>
                         </div>
                         <div class="form-group password-field">
-                            <label class="control-label">Password</label>
-                            <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+                            <label class="control-label">{{__('page.password')}}</label>
+                            <input type="password" name="password" id="password" class="form-control" placeholder="{{__('page.password')}}">
                             <span id="password_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>    
                         <div class="form-group password-field">
-                            <label class="control-label">Password Confirm</label>
-                            <input type="password" name="password_confirmation" id="confirmpassword" class="form-control" placeholder="Password Confirm">
+                            <label class="control-label">{{__('page.password_confirm')}}</label>
+                            <input type="password" name="password_confirmation" id="confirmpassword" class="form-control" placeholder="{{__('page.password_confirm')}}">
                             <span id="confirmpassword_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
                     </div>    
                     <div class="modal-footer">
-                        <button type="button" id="btn_create" class="btn btn-primary btn-submit"><i class="icon-paperplane"></i>&nbsp;Save</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="icon-close2"></i>&nbsp;Close</button>
+                        <button type="button" id="btn_create" class="btn btn-primary btn-submit"><i class="icon-paperplane"></i>&nbsp;{{__('page.save')}}</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="icon-close2"></i>&nbsp;{{__('page.save')}}</button>
                     </div>
                 </form>
             </div>
@@ -133,7 +133,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit User</h4>
+                    <h4 class="modal-title">{{__('page.edit_user')}}</h4>
                     <button type="button" class="close" data-dismiss="modal">×</button>
                 </div>
                 <form action="" id="edit_form" method="post">
@@ -141,38 +141,37 @@
                     <div class="modal-body">
                         <input type="hidden" name="id" id="edit_id" />                    
                         <div class="form-group">
-                            <label class="control-label">Username</label>
-                            <input class="form-control" type="text" name="name" id="edit_name" placeholder="UserID">
+                            <label class="control-label">{{__('page.username')}}</label>
+                            <input class="form-control" type="text" name="name" id="edit_name" placeholder="{{__('page.username')}}">
                             <span id="edit_name_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Phone Number</label>
-                            <input class="form-control" type="text" name="phone" id="edit_phone" placeholder="Phone Number">
+                            <label class="control-label">{{__('page.phone_number')}}</label>
+                            <input class="form-control" type="text" name="phone" id="edit_phone" placeholder="{{__('page.phone_number')}}">
                             <span id="edit_phone_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
                         <div class="form-group password-field">
-                            <label class="control-label">Password</label>
-                            <input type="password" name="password" id="edit_password" class="form-control" placeholder="Password">
+                            <label class="control-label">{{__('page.new_password')}}</label>
+                            <input type="password" name="password" id="edit_password" class="form-control" placeholder="{{__('page.new_password')}}">
                             <span id="edit_password_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>    
                         <div class="form-group password-field">
-                            <label class="control-label">Password Confirm</label>
-                            <input type="password" name="password_confirmation" id="edit_confirmpassword" class="form-control" placeholder="Password Confirm">
+                            <label class="control-label">{{__('page.password_confirm')}}</label>
+                            <input type="password" name="password_confirmation" id="edit_confirmpassword" class="form-control" placeholder="{{__('page.password_confirm')}}">
                             <span id="edit_confirmpassword_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
-                    </div>
-    
+                    </div>    
                     <div class="modal-footer">
-                        <button type="button" id="btn_update" class="btn btn-primary btn-submit"><i class="icon-paperplane"></i>&nbsp;Save</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="icon-close2"></i>&nbsp;Close</button>
+                        <button type="button" id="btn_update" class="btn btn-primary btn-submit"><i class="icon-paperplane"></i>&nbsp;{{__('page.save')}}</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="icon-close2"></i>&nbsp;{{__('page.close')}}</button>
                     </div>
                 </form>
             </div>

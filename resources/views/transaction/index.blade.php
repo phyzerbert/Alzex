@@ -10,7 +10,7 @@
         <div class="page-header page-header-light">
             <div class="page-header-content header-elements-md-inline">
                 <div class="page-title d-flex">
-                    <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Home</span> - Transaction</h4>
+                    <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{{__('page.home')}}</span> - {{__('page.transaction')}}</h4>
                     <a href="index.html#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
                 </div>
                 <div class="header-elements d-flex">
@@ -34,8 +34,8 @@
             <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
                 <div class="d-flex">
                     <div class="breadcrumb">
-                        <a href="{{url('/')}}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-                        <span class="breadcrumb-item active">Transaction</span>
+                        <a href="{{url('/')}}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> {{__('page.home')}}</a>
+                        <span class="breadcrumb-item active">{{__('page.transaction')}}</span>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
             <div class="card">
                 <div class="card-header">
                     @include('transaction.filter')
-                    <a href="{{route('transaction.create')}}" class="btn btn-primary btn-sm float-right" id="btn-add"><i class="icon-plus-circle2 mr-2"></i> Add New</a>
+                    <a href="{{route('transaction.create')}}" class="btn btn-primary btn-sm float-right" id="btn-add"><i class="icon-plus-circle2 mr-2"></i> {{__('page.add_new')}}</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -53,16 +53,16 @@
                             <thead>
                                 <tr class="bg-blue">
                                     <th style="width:30px;">#</th>
-                                    <th>Type</th>
-                                    <th>User</th>
-                                    <th>Category</th>
-                                    <th>Amount</th>
-                                    <th>Withdraw From</th>
-                                    <th>Target Account</th>
-                                    <th>Date</th>
-                                    <th>Description</th>
+                                    <th>{{__('page.type')}}</th>
+                                    <th>{{__('page.user')}}</th>
+                                    <th>{{__('page.category')}}</th>
+                                    <th>{{__('page.amount')}}</th>
+                                    <th>{{__('page.withdraw_from')}}</th>
+                                    <th>{{__('page.target_account')}}</th>
+                                    <th>{{__('page.date')}}</th>
+                                    <th>{{__('page.description')}}</th>
                                     @if($role == 'admin')
-                                        <th>Action</th>
+                                        <th>{{__('page.action')}}</th>
                                     @endif
                                 </tr>
                             </thead>
@@ -90,8 +90,8 @@
                                         </td>
                                         @if($role == 'admin')
                                             <td class="py-1" style="min-width:130px;">
-                                                <a href="#" class="btn bg-blue btn-icon rounded-round btn-edit" data-id="{{$item->id}}"  data-popup="tooltip" title="Edit" data-placement="top"><i class="icon-pencil7"></i></a>
-                                                <a href="{{route('transaction.delete', $item->id)}}" class="btn bg-danger text-pink-800 btn-icon rounded-round ml-2" data-popup="tooltip" title="Delete" data-placement="top" onclick="return window.confirm('Are you sure?')"><i class="icon-trash"></i></a>
+                                                <a href="#" class="btn bg-blue btn-icon rounded-round btn-edit" data-id="{{$item->id}}"  data-popup="tooltip" title="{{__('page.edit')}}" data-placement="top"><i class="icon-pencil7"></i></a>
+                                                <a href="{{route('transaction.delete', $item->id)}}" class="btn bg-danger text-pink-800 btn-icon rounded-round ml-2" data-popup="tooltip" title="{{__('page.delete')}}" data-placement="top" onclick="return window.confirm('{{__('page.are_you_sure')}}')"><i class="icon-trash"></i></a>
                                             </td>
                                         @endif
                                     </tr>
@@ -99,16 +99,16 @@
                             </tbody>
                             <tfoot class="text-danger text-center">
                                 <tr>
-                                    <td colspan="2">Total</td>
-                                    <td colspan="3">Expenses : {{$expenses}}</td>
-                                    <td colspan="3">Incomes : {{$incomes}}</td>
-                                    <td colspan="2">Profit : {{$incomes - $expenses}}</td>
+                                    <td colspan="2">{{__('page.total')}}</td>
+                                    <td colspan="3">{{__('page.expenses')}} : {{$expenses}}</td>
+                                    <td colspan="3">{{__('page.incomes')}} : {{$incomes}}</td>
+                                    <td colspan="2">{{__('page.profit')}} : {{$incomes - $expenses}}</td>
                                 </tr>
                             </tfoot>
                         </table>
                         <div class="clearfix mt-1">
                             <div class="float-left" style="margin: 0;">
-                                <p>Total <strong style="color: red">{{ $data->total() }}</strong> Items</p>
+                                <p>{{__('page.total')}} <strong style="color: red">{{ $data->total() }}</strong> {{__('page.items')}}</p>
                             </div>
                             <div class="float-right" style="margin: 0;">
                                 {!! $data->appends(['user' => $user, 'category' => $category, 'type' => $type, 'account' => $account, ''])->links() !!}

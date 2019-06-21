@@ -7,8 +7,8 @@
         <div class="page-header page-header-light">
             <div class="page-header-content header-elements-md-inline">
                 <div class="page-title d-flex">
-                    <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Home</span> - Transaction</h4>
-                    <a href="index.html#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+                    <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{{__('page.home')}}</span> - {{__('page.transaction')}}</h4>
+                    <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
                 </div>
 
                 <div class="header-elements d-none">
@@ -20,9 +20,9 @@
             <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
                 <div class="d-flex">
                     <div class="breadcrumb">
-                        <a href="{{url('/')}}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-                        <a href="{{route('transaction.index')}}" class="breadcrumb-item">Transaction</a>
-                        <span class="breadcrumb-item active">Add New</span>
+                        <a href="{{url('/')}}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> {{__('page.home')}}</a>
+                        <a href="{{route('transaction.index')}}" class="breadcrumb-item">{{__('page.transaction')}}</a>
+                        <span class="breadcrumb-item active">{{__('page.add_new')}}</span>
                     </div>
                 </div>
             </div>
@@ -35,16 +35,16 @@
                 </div>
                 <div class="card-body">
                     <ul class="nav nav-tabs nav-tabs-highlight">
-                        <li class="nav-item"><a href="#expense" class="nav-link active show" data-toggle="tab">Expense</a></li>
-                        <li class="nav-item"><a href="#incoming" class="nav-link" data-toggle="tab">Incoming</a></li>
-                        <li class="nav-item"><a href="#transfer" class="nav-link" data-toggle="tab">Transfer</a></li>
+                        <li class="nav-item"><a href="#expense" class="nav-link active show" data-toggle="tab">{{__('page.expense')}}</a></li>
+                        <li class="nav-item"><a href="#incoming" class="nav-link" data-toggle="tab">{{__('page.incoming')}}</a></li>
+                        <li class="nav-item"><a href="#transfer" class="nav-link" data-toggle="tab">{{__('page.transfer')}}</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="expense">                            
                             <form action="{{route('transaction.expense')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                    <label>User:</label>
+                                    <label>{{__('page.user')}}:</label>
                                     <select data-placeholder="Select user" name="user" class="form-control form-control-select2" data-fouc>
                                         @foreach ($users as $user)
                                             <option value={{$user->id}}>{{$user->name}}</option>
@@ -56,7 +56,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Catogory:</label>
+                                    <label>{{__('page.category')}}:</label>
                                     <select data-placeholder="Select category" name="category" class="form-control form-control-select2" data-fouc>
                                         @foreach ($categories as $category)
                                             <option value={{$category->id}}>{{$category->name}}</option>
@@ -68,8 +68,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Withdraw From:</label>
-                                    <select data-placeholder="Withdraw From" name="account" class="form-control form-control-select2-icons" data-fouc>
+                                    <label>{{__('page.withdraw_from')}}:</label>
+                                    <select data-placeholder="{{__('page.withdraw_from')}}" name="account" class="form-control form-control-select2-icons" data-fouc>
                                         @foreach ($accountgroups as $accountgroup)
                                             <optgroup label="{{$accountgroup->name}}">
                                                 @foreach ($accountgroup->accounts as $account)
@@ -84,37 +84,37 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Date:</label>
+                                    <label>{{__('page.date')}}:</label>
                                     <div class="input-group">
                                         <span class="input-group-prepend">
                                             <span class="input-group-text"><i class="icon-calendar"></i></span>
                                         </span>
-                                        <input type="text" name="timestamp" class="form-control pickadate" placeholder="Date">
+                                        <input type="text" name="timestamp" class="form-control pickadate" placeholder="{{__('page.date')}}">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Amount:</label>
-                                    <input type="number" name="amount" class="form-control" placeholder="Amount">
+                                    <label>{{__('page.amount')}}:</label>
+                                    <input type="number" name="amount" class="form-control" placeholder="{{__('page.amount')}}">
                                     @error('amount')
                                         <span class="form-text text-success">{{ $message }}</span>
                                     @enderror
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Attachment:</label>
+                                    <label>{{__('page.attachment')}}:</label>
                                     <input type="file" name="attachment" class="form-input-styled" accept="image/*" data-fouc>
-                                    <span class="form-text text-muted">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
+                                    <span class="form-text text-muted">{{__('page.accepted_formats_image')}}</span>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Description:</label>
-                                    <input type="text" name="description" class="form-control" placeholder="Description">
+                                    <label>{{__('page.description')}}:</label>
+                                    <input type="text" name="description" class="form-control" placeholder="{{__('page.description')}}">
                                 </div>
 
                                 <div class="text-right">
-                                    <a href="{{route('transaction.index')}}" class="btn btn-secondary">Back <i class="icon-undo2 ml-2"></i></a>
-                                    <button type="submit" class="btn btn-primary">Save <i class="icon-paperplane ml-2"></i></button>
+                                    <a href="{{route('transaction.index')}}" class="btn btn-secondary">{{__('page.back')}} <i class="icon-undo2 ml-2"></i></a>
+                                    <button type="submit" class="btn btn-primary">{{__('page.save')}} <i class="icon-paperplane ml-2"></i></button>
                                 </div>
                             </form>
                         </div>
@@ -122,7 +122,7 @@
                             <form action="{{route('transaction.incoming')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                    <label>User:</label>
+                                    <label>{{__('page.user')}}:</label>
                                     <select data-placeholder="Select user" name="user" class="form-control form-control-select2" data-fouc>
                                         @foreach ($users as $user)
                                             <option value={{$user->id}}>{{$user->name}}</option>
@@ -134,7 +134,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Catogory:</label>
+                                    <label>{{__('page.category')}}:</label>
                                     <select data-placeholder="Select category" name="category" class="form-control form-control-select2" data-fouc>
                                         @foreach ($categories as $category)
                                             <option value={{$category->id}}>{{$category->name}}</option>
@@ -146,7 +146,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Target Account:</label>
+                                    <label>{{__('page.target_account')}}:</label>
                                     <select data-placeholder="Target From" name="account" class="form-control form-control-select2-icons" data-fouc>
                                         @foreach ($accountgroups as $accountgroup)
                                             <optgroup label="{{$accountgroup->name}}">
@@ -162,34 +162,34 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Date:</label>
+                                    <label>{{__('page.date')}}:</label>
                                     <div class="input-group">
                                         <span class="input-group-prepend">
                                             <span class="input-group-text"><i class="icon-calendar"></i></span>
                                         </span>
-                                        <input type="text" name="timestamp" class="form-control pickadate" placeholder="Date">
+                                        <input type="text" name="timestamp" class="form-control pickadate" placeholder="{{__('page.date')}}">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Amount:</label>
-                                    <input type="number" name="amount" class="form-control" placeholder="Amount">
+                                    <label>{{__('page.amount')}}:</label>
+                                    <input type="number" name="amount" class="form-control" placeholder="{{__('page.amount')}}">
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Attachment:</label>
+                                    <label>{{__('page.attachment')}}:</label>
                                     <input type="file" name="attachment" class="form-input-styled" accept="image/*" data-fouc>
-                                    <span class="form-text text-muted">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
+                                    <span class="form-text text-muted">{{__('page.accepted_formats_image')}}</span>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Description:</label>
-                                    <input type="text" name="description" class="form-control" placeholder="Description">
+                                    <label>{{__('page.description')}}:</label>
+                                    <input type="text" name="description" class="form-control" placeholder="{{__('page.description')}}">
                                 </div>
 
                                 <div class="text-right">
-                                    <a href="{{route('transaction.index')}}" class="btn btn-secondary">Back <i class="icon-undo2 ml-2"></i></a>
-                                    <button type="submit" class="btn btn-primary">Save <i class="icon-paperplane ml-2"></i></button>
+                                    <a href="{{route('transaction.index')}}" class="btn btn-secondary">{{__('page.back')}} <i class="icon-undo2 ml-2"></i></a>
+                                    <button type="submit" class="btn btn-primary">{{__('page.save')}} <i class="icon-paperplane ml-2"></i></button>
                                 </div>
                             </form>
                         </div>
@@ -198,7 +198,7 @@
                                 @csrf
                                 <input type="hidden" name="type" value="1">
                                 <div class="form-group">
-                                    <label>User:</label>
+                                    <label>{{__('page.user')}}:</label>
                                     <select data-placeholder="Select user" name="user" class="form-control form-control-select2" data-fouc>
                                         @foreach ($users as $user)
                                             <option value={{$user->id}}>{{$user->name}}</option>
@@ -210,7 +210,7 @@
                                 @enderror
 
                                 <div class="form-group">
-                                    <label>Catogory:</label>
+                                    <label>{{__('page.category')}}:</label>
                                     <select data-placeholder="Select category" name="category" class="form-control form-control-select2" data-fouc>
                                         @foreach ($categories as $category)
                                             <option value={{$category->id}}>{{$category->name}}</option>
@@ -222,8 +222,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Withdraw From:</label>
-                                    <select data-placeholder="Withdraw From" name="account" class="form-control form-control-select2-icons" data-fouc>
+                                    <label>{{__('page.withdraw_from')}}:</label>
+                                    <select data-placeholder="{{__('page.withdraw_from')}}" name="account" class="form-control form-control-select2-icons" data-fouc>
                                         @foreach ($accountgroups as $accountgroup)
                                             <optgroup label="{{$accountgroup->name}}">
                                                 @foreach ($accountgroup->accounts as $account)
@@ -238,8 +238,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Target Account:</label>
-                                    <select data-placeholder="Target Account" name="target" class="form-control form-control-select2-icons" data-fouc>
+                                    <label>{{__('page.target_account')}}:</label>
+                                    <select data-placeholder="{{__('page.target_account')}}" name="target" class="form-control form-control-select2-icons" data-fouc>
                                         @foreach ($accountgroups as $accountgroup)
                                             <optgroup label="{{$accountgroup->name}}">
                                                 @foreach ($accountgroup->accounts as $account)
@@ -254,37 +254,37 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Date:</label>
+                                    <label>{{__('page.date')}}:</label>
                                     <div class="input-group">
                                         <span class="input-group-prepend">
                                             <span class="input-group-text"><i class="icon-calendar"></i></span>
                                         </span>
-                                        <input type="text" name="timestamp" class="form-control pickadate" placeholder="Date">
+                                        <input type="text" name="timestamp" class="form-control pickadate" placeholder="{{__('page.date')}}">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Amount:</label>
-                                    <input type="number" name="amount" class="form-control" placeholder="Amount">
+                                    <label>{{__('page.amount')}}:</label>
+                                    <input type="number" name="amount" class="form-control" placeholder="{{__('page.amount')}}">
                                     @error('amount')
                                         <span class="form-text text-success">{{ $message }}</span>
                                     @enderror
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Attachment:</label>
+                                    <label>{{__('page.attachment')}}:</label>
                                     <input type="file" name="attachment" class="form-input-styled" accept="image/*" data-fouc>
-                                    <span class="form-text text-muted">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
+                                    <span class="form-text text-muted">{{__('page.accepted_formats_image')}}</span>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Description:</label>
-                                    <input type="text" name="description" class="form-control" placeholder="Description">
+                                    <label>{{__('page.description')}}:</label>
+                                    <input type="text" name="description" class="form-control" placeholder="{{__('page.description')}}">
                                 </div>
 
                                 <div class="text-right">
-                                    <a href="{{route('transaction.index')}}" class="btn btn-secondary">Back <i class="icon-undo2 ml-2"></i></a>
-                                    <button type="submit" class="btn btn-primary">Save <i class="icon-paperplane ml-2"></i></button>
+                                    <a href="{{route('transaction.index')}}" class="btn btn-secondary">{{__('page.back')}} <i class="icon-undo2 ml-2"></i></a>
+                                    <button type="submit" class="btn btn-primary">{{__('page.save')}} <i class="icon-paperplane ml-2"></i></button>
                                 </div>
                             </form>
                         </div>

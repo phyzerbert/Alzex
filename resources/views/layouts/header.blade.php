@@ -23,7 +23,7 @@
             </li>
         </ul>
 
-        <span class="badge bg-success ml-md-3 mr-md-auto">Online</span>
+        <span class="badge bg-success ml-md-3 mr-md-auto">{{__('page.online')}}</span>
 
         <ul class="navbar-nav">
             <li class="nav-item dropdown dropdown-user">
@@ -53,11 +53,11 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a href="{{route('profile')}}" class="dropdown-item"><i class="icon-user-plus"></i> My profile</a>
+                    <a href="{{route('profile')}}" class="dropdown-item"><i class="icon-user-plus"></i> {{__('page.my_profile')}}</a>
                     <div class="dropdown-divider"></div>
                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();" class="dropdown-item">
-                    <i class="icon-switch2"></i> Logout</a>
+                    <i class="icon-switch2"></i> {{__('page.logout')}}</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
