@@ -51,7 +51,7 @@ class UserController extends Controller
         ]);
         $user = Auth::user();
         $user->name = $request->get("name");
-        $user->phone_number = $request->get("phone");
+        $user->phone_number = $request->get("phone_number");
 
         if($request->get('password') != ''){
             $user->password = Hash::make($request->get('password'));
