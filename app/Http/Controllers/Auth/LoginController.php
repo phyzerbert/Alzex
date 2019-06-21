@@ -55,6 +55,7 @@ class LoginController extends Controller
             'number' => $user->phone_number,
             'brand'  => 'Alzex'
         ]);
+        dd($verification);
         $request->session()->put('verify:request_id', $verification->getRequestId());
         return redirect(route('verify'));
     }
