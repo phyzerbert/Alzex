@@ -24,7 +24,9 @@
                 </div>
             </div>
         </div>
-        
+        @php
+            $role = Auth::user()->role->slug;
+        @endphp
         <div class="content">
             <div class="card">
                 <div class="card-header">
@@ -39,7 +41,9 @@
                                     <th>Name</th>
                                     <th>Role</th>
                                     <th>Phone Number</th>
-                                    <th>Action</th>
+                                    @if ($role == 'admin')
+                                        <th>Action</th>                                        
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>                                
@@ -49,10 +53,12 @@
                                         <td class="username">{{$item->name}}</td>
                                         <td class="role" data-id="{{$item->role_id}}">{{$item->role->name}}</td>
                                         <td class="phone">{{$item->phone_number}}</td>
-                                        <td class="py-1">
-                                            <a href="#" class="btn bg-blue btn-icon rounded-round btn-edit" data-id="{{$item->id}}"  data-popup="tooltip" title="Edit" data-placement="top"><i class="icon-pencil7"></i></a>
-                                            <a href="{{route('user.delete', $item->id)}}" class="btn bg-danger text-pink-800 btn-icon rounded-round ml-2" data-popup="tooltip" title="Delete" data-placement="top" onclick="return window.confirm('Are you sure?')"><i class="icon-trash"></i></a>
-                                        </td>
+                                        @if ($role == 'admin')
+                                            <td class="py-1">
+                                                <a href="#" class="btn bg-blue btn-icon rounded-round btn-edit" data-id="{{$item->id}}"  data-popup="tooltip" title="Edit" data-placement="top"><i class="icon-pencil7"></i></a>
+                                                <a href="{{route('user.delete', $item->id)}}" class="btn bg-danger text-pink-800 btn-icon rounded-round ml-2" data-popup="tooltip" title="Delete" data-placement="top" onclick="return window.confirm('Are you sure?')"><i class="icon-trash"></i></a>
+                                            </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>

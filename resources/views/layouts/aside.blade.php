@@ -38,9 +38,7 @@
                 <li class="nav-item"><a href="{{route('transaction.index')}}" class="nav-link @if($page == 'transaction') active @endif"><i class="icon-cash3"></i><span>{{__('page.transaction')}}</span></a></li>
                 <li class="nav-item"><a href="{{route('account.index')}}" class="nav-link @if($page == 'account') active @endif"><i class="icon-credit-card"></i><span>{{__('page.account')}}</span></a></li>
                 <li class="nav-item"><a href="{{route('category.index')}}" class="nav-link @if($page == 'category') active @endif"><i class="icon-tree7"></i><span>{{__('page.category')}}</span></a></li>
-                @if($role == 'admin')
-                    <li class="nav-item"><a href="{{route('users.index')}}" class="nav-link @if($page == 'user') active @endif"><i class="icon-users2"></i><span>{{__('page.user')}}</span></a></li>
-                @endif
+                <li class="nav-item"><a href="{{route('users.index')}}" class="nav-link @if($page == 'user') active @endif"><i class="icon-users2"></i><span>{{__('page.user')}}</span></a></li>
             </ul>
         </div>
     </div>    
