@@ -1,6 +1,13 @@
 @extends('layouts.auth')
 
 @section('content')
+    @php
+        $verify_messages = [
+            '10' => __('page.concurrent_verifications_to_the_same_number_are_not_allowed'),
+            '4' => __('page.invalid_credentials_were_provided'),
+            '5' => __('page.internal_error'),
+        ];
+    @endphp     
     <div class="content d-flex justify-content-center align-items-center">
         <form class="login-form" action="{{ route('login') }}" method="POST">
             @csrf
@@ -11,6 +18,17 @@
                         {{-- <i class="icon-user icon-2x text-slate-300 border-slate-300 border-3 rounded-round p-3 mb-3 mt-1"></i> --}}
                         <h5 class="mb-0">{{__('page.login_to_your_account')}}</h5>
                         <span class="d-block text-muted">{{__('page.enter_your_credentials_below')}}</span>
+                        @error('phone')
+                            <span class="text-danger mt-2" role="alert">
+                                <strong>
+                                    @if ($verify_messages[$message])
+                                        {{ $verify_messages[$message] }}
+                                    @else
+                                        {{__('page.invalid_verification_request')}}
+                                    @endif
+                                </strong>
+                            </span>
+                        @enderror
                     </div>
 
                     <div class="form-group form-group-feedback form-group-feedback-left">

@@ -28,8 +28,7 @@ class VerifyController extends Controller
         } catch (Nexmo\Client\Exception\Request $e) {
             return redirect()->back()->withErrors([
                 'code' => $e->getMessage()
-            ]);
-    
+            ]);    
         }
     }
 

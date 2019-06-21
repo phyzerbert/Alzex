@@ -30,7 +30,9 @@
         <div class="content">
             <div class="card">
                 <div class="card-header">
-                    <button type="button" class="btn btn-primary float-right" id="btn-add"><i class="icon-user-plus mr-2"></i> {{__('page.add_new')}}</button>
+                    @if ($role == 'admin')
+                        <button type="button" class="btn btn-primary float-right" id="btn-add"><i class="icon-user-plus mr-2"></i> {{__('page.add_new')}}</button>
+                    @endif
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

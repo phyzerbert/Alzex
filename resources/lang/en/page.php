@@ -102,4 +102,10 @@ return [
     'confirm_password' => 'Confirm Password',
     'save_changes' => 'Save Changes',
 
+    // ******** Phone Verification ********
+    'invalid_verification_request' => 'Invalid verification request',
+    'concurrent_verifications_to_the_same_number_are_not_allowed' => 'Concurrent verifications to the same number are not allowed',
+    'invalid_credentials_were_provided' => 'Invalid credentials were provided',
+    'internal_error' => 'Internal Error',
+
 ];

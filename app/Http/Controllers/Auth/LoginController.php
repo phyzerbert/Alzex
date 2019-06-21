@@ -50,13 +50,26 @@ class LoginController extends Controller
     public function authenticated(Request $request, Authenticatable $user)
     {
         Auth::logout();
+        
         $request->session()->put('verify:user:id', $user->id);
-        $verification = Nexmo::verify()->start([
+
+        $url = 'https://api.nexmo.com/verify/json?' . http_build_query([
+            'api_key' => env('NEXMO_KEY'),
+            'api_secret' => env('NEXMO_SECRET'),
             'number' => $user->phone_number,
-            'brand'  => 'Alzex'
+            'brand' => 'Alzex',
         ]);
-        // dd($verification);
-        $request->session()->put('verify:request_id', $verification->getRequestId());
-        return redirect(route('verify'));
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        $response = json_decode($response);
+        
+        if($response->status == 0){
+            $request->session()->put('verify:request_id', $response->request_id);
+            return redirect(route('verify'));
+        }else{
+            return redirect(route('login'))->withErrors(['phone' => $response->status]);
+        }
     }
 }

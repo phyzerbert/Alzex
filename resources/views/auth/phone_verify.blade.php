@@ -21,12 +21,12 @@
             <div class="card mb-0">                
                 <div class="card-body">
                     <div class="text-center mb-3">
-                        <i class="icon-phone2 icon-2x text-warning border-warning border-3 rounded-round p-3 mb-3 mt-1"></i>
+                        <i class="icon-mobile2 icon-2x text-warning border-warning border-3 rounded-round p-3 mb-3 mt-1"></i>
                         <h5 class="mb-0">{{__('page.verification_phone_number')}}</h5>
                         <span class="d-block text-muted">{{__('page.please_enter_your_verification_code')}}</span>
                     </div>
                     <div class="form-group form-group-feedback form-group-feedback-right">
-                        <input id="code" type="number" class="form-control  @error('code') is-invalid @enderror" name="code" value="{{ old('code') }}" placeholder="{{__('page.verification_code')}}" required autofocus>                                
+                        <input id="code" type="number" class="form-control" name="code" value="{{ old('code') }}" placeholder="{{__('page.verification_code')}}" required autofocus>                                
                         <div class="form-control-feedback">
                             <i class="icon-phone2 text-muted"></i>
                         </div>

@@ -103,5 +103,10 @@ return [
     'confirm_password' => 'Confirmar',
     'save_changes' => 'Guardar',
 
-
+    // ******** Phone Verification ********
+    'invalid_verification_request' => 'Solicitud de verificación no válida',
+    'concurrent_verifications_to_the_same_number_are_not_allowed' => 'No se permiten verificaciones concurrentes al mismo número.',
+    'invalid_credentials_were_provided' => 'Se proporcionaron credenciales inválidas',
+    'internal_error' => 'Error interno',
+    
 ];
