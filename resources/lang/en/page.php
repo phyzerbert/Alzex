@@ -48,6 +48,7 @@ return [
     'total' => 'Total',
     'items' => 'Items',
     'all' => 'All',
+    'show' => 'Show',
     'comment' => 'Comment',
     'are_you_sure' => 'Are you sure?',
     'accepted_formats_image' => 'Accepted formats: gif, png, jpg. Max file size 2Mb.',

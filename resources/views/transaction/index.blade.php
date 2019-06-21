@@ -44,6 +44,16 @@
         <div class="content">
             <div class="card">
                 <div class="card-header">
+                    <form class="form-inline ml-3 float-left" action="{{route('set_pagesize')}}" method="post" id="pagesize_form">
+                        @csrf
+                        <label for="pagesize" class="control-label">{{__('page.show')}} :</label>
+                        <select class="form-control form-control-sm mx-2" name="pagesize" id="pagesize">
+                            <option value="" @if($pagesize == '') selected @endif>{{__('page.all')}}</option>
+                            <option value="25" @if($pagesize == '25') selected @endif>25</option>
+                            <option value="50" @if($pagesize == '50') selected @endif>50</option>
+                            <option value="100" @if($pagesize == '100') selected @endif>100</option>
+                        </select>
+                    </form>
                     @include('transaction.filter')
                     <a href="{{route('transaction.create')}}" class="btn btn-primary btn-sm float-right" id="btn-add"><i class="icon-plus-circle2 mr-2"></i> {{__('page.add_new')}}</a>
                 </div>
@@ -53,14 +63,14 @@
                             <thead>
                                 <tr class="bg-blue">
                                     <th style="width:30px;">#</th>
-                                    <th>{{__('page.type')}}</th>
-                                    <th>{{__('page.user')}}</th>
+                                    <th>{{__('page.date')}}</th>
                                     <th>{{__('page.category')}}</th>
+                                    <th>{{__('page.description')}}</th>
                                     <th>{{__('page.amount')}}</th>
                                     <th>{{__('page.withdraw_from')}}</th>
                                     <th>{{__('page.target_account')}}</th>
-                                    <th>{{__('page.date')}}</th>
-                                    <th>{{__('page.description')}}</th>
+                                    <th>{{__('page.user')}}</th>
+                                    <th>{{__('page.type')}}</th>
                                     @if($role == 'admin')
                                         <th>{{__('page.action')}}</th>
                                     @endif
@@ -70,23 +80,31 @@
                                 @foreach ($data as $item)
                                     <tr>
                                         <td>{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
-                                        <td class="type">
-                                            @php
-                                                $types = array('Expense', 'Incoming', 'Transfer');
-                                            @endphp
-                                            {{$types[$item->type-1]}}
-                                        </td>
-                                        <td class="user">{{$item->user->name}}</td>
-                                        <td class="category">{{$item->category->name}}</td>
-                                        <td class="amount">{{$item->amount}}</td>
-                                        <td class="from">@isset($item->account->name){{$item->account->name}}@endisset</td>
-                                        <td class="to">@isset($item->target->name){{$item->target->name}}@endisset</td>
                                         <td class="date">{{ date('Y-m-d', strtotime($item->timestamp))}}</td>
+                                        <td class="category">{{$item->category->name}}</td>
                                         <td class="description">
                                             {{$item->description}}
                                             @if ($item->attachment != "")
                                                 <a href="#" class="btn-attach" data-value="{{$item->attachment}}"><i class="icon-attachment"></i></a>
                                             @endif
+                                        </td>
+                                        <td class="amount">
+                                            @if ($item->type == 1)
+                                                <span style="color:red">{{number_format($item->amount,2)}}</span>
+                                            @elseif($item->type == 2)
+                                                <span style="color:green">{{number_format($item->amount,2)}}</span>
+                                            @else
+                                                {{number_format($item->amount,2)}}
+                                            @endif
+                                        </td>
+                                        <td class="from">@isset($item->account->name){{$item->account->name}}@endisset</td>
+                                        <td class="to">@isset($item->target->name){{$item->target->name}}@endisset</td>
+                                        <td class="user">{{$item->user->name}}</td>
+                                        <td class="type">
+                                            @php
+                                                $types = array(__('page.expense'), __('page.incoming'), __('page.transfer'));
+                                            @endphp
+                                            {{$types[$item->type-1]}}
                                         </td>
                                         @if($role == 'admin')
                                             <td class="py-1" style="min-width:130px;">
@@ -150,6 +168,10 @@
             $("#search_type").val('');
             $("#period").val('');
         });
+
+        $("#pagesize").change(function(){
+            $("#pagesize_form").submit();
+        })
     });
 </script>
 @endsection

@@ -42,5 +42,14 @@ class HomeController extends Controller
             $to = substr($period, 14, 10);
         }
         return view('home', compact('period', 'search_users', 'search_categories', 'from', 'to'));
-    }    
+    } 
+    
+    public function set_pagesize(Request $request){
+        // config(['app.pagesize' => $request->get('pagesize')]);
+        $request->session()->put('pagesize', $request->get('pagesize'));
+        // $setting = Setting::find(1);
+        // $setting->pagesize = $request->get('pagesize');
+        // $setting->save();
+        return back();
+    }
 }

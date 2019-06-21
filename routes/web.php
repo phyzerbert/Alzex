@@ -56,3 +56,5 @@ Route::post('/transaction/transfer', 'TransactionController@transfer')->name('tr
 Route::get('/transaction/edit/{id}', 'TransactionController@edit')->name('transaction.edit');
 Route::post('/transaction/update', 'TransactionController@update')->name('transaction.update');
 Route::get('/transaction/delete/{id}', 'TransactionController@delete')->name('transaction.delete');
+
+Route::post('/set_pagesize', 'HomeController@set_pagesize')->name('set_pagesize');

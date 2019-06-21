@@ -49,6 +49,7 @@ return [
     'total' => 'Total',
     'items' => 'Items',
     'all' => 'All',
+    'show' => 'Mostrar',
     'comment' => 'Comentario',
     'are_you_sure' => 'Estas Seguro?',
     'accepted_formats_image' => 'Formatos Aceptados: gif, png, jpg. Tamaño Maximo 2Mb.',
@@ -108,5 +109,5 @@ return [
     'concurrent_verifications_to_the_same_number_are_not_allowed' => 'No se permiten verificaciones concurrentes al mismo número.',
     'invalid_credentials_were_provided' => 'Se proporcionaron credenciales inválidas',
     'internal_error' => 'Error interno',
-    
+
 ];

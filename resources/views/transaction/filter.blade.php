@@ -1,14 +1,14 @@
 <form action="" method="POST" class="form-inline float-left" id="searchForm">
     @csrf
     <select class="form-control form-control-sm mr-sm-2 mb-2" name="type" id="search_type">
-        <option value="">Select a type</option>
+        <option value="">{{__('page.select_type')}}</option>
         <option value="1" @if ($type == 1) selected @endif>{{__('page.expense')}}</option>
         <option value="2" @if ($type == 2) selected @endif>{{__('page.incoming')}}</option>
         <option value="3" @if ($type == 3) selected @endif>{{__('page.transfer')}}</option>
     </select>
     <input type="text" class="form-control form-control-sm mr-sm-2 mb-2" name="user" id="search_user" value="{{$user}}" placeholder="{{__('page.username')}}">
     <select class="form-control form-control-sm mr-sm-2 mb-2" name="account" id="search_account">
-        <option value="">Select an account</option>
+        <option value="">{{__('page.select_account')}}</option>
         @foreach ($accountgroups as $accountgroup)
             <optgroup label="{{$accountgroup->name}}">
                 @foreach ($accountgroup->accounts as $item)
@@ -18,7 +18,7 @@
         @endforeach      
     </select>
     <select class="form-control form-control-sm mr-sm-2 mb-2" name="category" id="search_category">
-        <option value="">Select a category</option>
+        <option value="">{{__('page.select_category')}}</option>
         @foreach ($categories as $item)
             <option value="{{$item->id}}" @if ($category == $item->id) selected @endif>{{$item->name}}</option>
         @endforeach
