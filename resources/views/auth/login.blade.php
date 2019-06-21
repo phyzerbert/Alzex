@@ -7,7 +7,8 @@
             <div class="card mb-0">
                 <div class="card-body">
                     <div class="text-center mb-3">
-                        <i class="icon-reading icon-2x text-slate-300 border-slate-300 border-3 rounded-round p-3 mb-3 mt-1"></i>
+                        <img src="{{asset('images/avatar128.png')}}" width="90" class="border-slate-300 border-3 rounded-round mb-2 mt-1" alt="">
+                        {{-- <i class="icon-user icon-2x text-slate-300 border-slate-300 border-3 rounded-round p-3 mb-3 mt-1"></i> --}}
                         <h5 class="mb-0">{{__('page.login_to_your_account')}}</h5>
                         <span class="d-block text-muted">{{__('page.enter_your_credentials_below')}}</span>
                     </div>
@@ -52,8 +53,8 @@
                         </div>
                     @endif --}}
                     <div class="form-group text-center">
-                        <a href="{{route('lang', 'en')}}" class="btn btn-outline p-0" title="English"><img src="{{asset('images/lang/en.png')}}" width="45px"></a>
-                        <a href="{{route('lang', 'es')}}" class="btn btn-outline ml-2 p-0" title="Spanish"><img src="{{asset('images/lang/es.png')}}" width="45px"></a>
+                        <a href="{{route('lang', 'en')}}" class="btn btn-outline p-0 @if(config('app.locale') == 'en') border-primary border-2 @endif" title="English"><img src="{{asset('images/lang/en.png')}}" width="45px"></a>
+                        <a href="{{route('lang', 'es')}}" class="btn btn-outline ml-2 p-0 @if(config('app.locale') == 'es') border-primary border-2 @endif" title="Spanish"><img src="{{asset('images/lang/es.png')}}" width="45px"></a>
                     </div>
                 </div>
             </div>
