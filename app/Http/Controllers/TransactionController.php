@@ -197,15 +197,14 @@ class TransactionController extends Controller
     }
 
     public function update(Request $request){
-        // dump($request->all());die;
         $item = Transaction::find($request->get('id'));
         $type = $item->type;
         $item->user_id = $request->get('user');
         $item->category_id = $request->get('category');
-        $item->amount = $request->get('amount');
         $item->description = $request->get('description');
         $item->timestamp = $request->get('timestamp');
         if($type == 1){
+            // dd($request->all());
             if($item->from != $request->get('account')){
                 $new_account = Account::find($request->get('account'));
                 $old_account = $item->account;
@@ -220,11 +219,11 @@ class TransactionController extends Controller
             if($item->to != $request->get('account')){
                 $old_target = $item->target;
                 $new_target = Account::find($request->get('account'));
-                if($old_account->balance < $item->amount){
+                if($old_target->balance < $item->amount){
                     return back()->withErrors(['insufficient' => 'Insufficient Balance']);
                 }
-                $new_account->increment('balance', $request->get('amount'));
-                $old_account->decrement('balance', $item->amount);
+                $new_target->increment('balance', $request->get('amount'));
+                $old_target->decrement('balance', $item->amount);
                 $item->to = $request->get('account');
             }
         }else if($type == 3){
