@@ -62,7 +62,7 @@ return [
     'select_account' => 'Select an account',
     'select_category' => 'Select a category',
     'timestamp' => 'Timestamp',
-    'amount' => 'Save',
+    'amount' => 'Amount',
     'withdraw_from' => 'Withdraw From',
     'date' => 'Date',
     'target_account' => 'Target Account',
@@ -73,6 +73,7 @@ return [
     'profit' => 'Profit',
 
     // ******** Category ********
+
     
     // ******** Account ********
     'group' => 'Group',

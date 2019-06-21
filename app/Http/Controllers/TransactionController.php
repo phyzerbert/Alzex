@@ -31,6 +31,7 @@ class TransactionController extends Controller
         config(['site.page' => 'transaction']);
         $categories = Category::all();
         $accountgroups = Accountgroup::all();
+        $users = User::all();
         
         $mod = new Transaction();
         $mod1 = new Transaction();
@@ -69,7 +70,7 @@ class TransactionController extends Controller
         $expenses = $mod->where('type', 1)->sum('amount');
         $incomes = $mod->where('type', 2)->sum('amount');
         $data = $mod->orderBy('created_at', 'desc')->paginate(15);
-        return view('transaction.index', compact('data', 'expenses', 'incomes', 'categories', 'accountgroups', 'type', 'user', 'category', 'account', 'period'));
+        return view('transaction.index', compact('data', 'expenses', 'incomes', 'categories', 'accountgroups', 'users', 'type', 'user', 'category', 'account', 'period'));
     }
 
     public function create(Request $request){
@@ -187,17 +188,80 @@ class TransactionController extends Controller
         return back()->with('success', 'Created Successfully');
     }
 
-    public function edit(Request $request){
-        $request->validate([
-            'name'=>'required',
-            'group'=>'required',
-        ]);
-        $item = Transaction::find($request->get("id"));
-        $item->name = $request->get("name");
-        $item->comment = $request->get("comment");
-        $item->group_id = $request->get("group");
+    public function edit(Request $request, $id){
+        $item = Transaction::find($id);
+        $users = User::all();
+        $categories = Category::all();
+        $accountgroups = Accountgroup::all();  
+        return view('transaction.edit', compact('item', 'users', 'categories', 'accountgroups'));
+    }
+
+    public function update(Request $request){
+        // dump($request->all());die;
+        $item = Transaction::find($request->get('id'));
+        $type = $item->type;
+        $item->user_id = $request->get('user');
+        $item->category_id = $request->get('category');
+        $item->amount = $request->get('amount');
+        $item->description = $request->get('description');
+        $item->timestamp = $request->get('timestamp');
+        if($type == 1){
+            if($item->from != $request->get('account')){
+                $new_account = Account::find($request->get('account'));
+                $old_account = $item->account;
+                if($new_account->balance < $request->get('amount')){
+                    return back()->withErrors(['insufficient' => 'Insufficient Balance']);
+                }
+                $old_account->increment('balance', $item->amount);
+                $new_account->decrement('balance', $request->get('amount'));
+                $item->from = $request->get('account');
+            }
+        }else if($type == 2){
+            if($item->to != $request->get('account')){
+                $old_target = $item->target;
+                $new_target = Account::find($request->get('account'));
+                if($old_account->balance < $item->amount){
+                    return back()->withErrors(['insufficient' => 'Insufficient Balance']);
+                }
+                $new_account->increment('balance', $request->get('amount'));
+                $old_account->decrement('balance', $item->amount);
+                $item->to = $request->get('account');
+            }
+        }else if($type == 3){
+            if($item->from != $request->get('account')){
+                $old_from = $item->account;
+                $new_from = Account::find($request->get('account'));
+                if($new_from->balance < $request->get('amount')){
+                    return back()->withErrors(['insufficient' => 'Insufficient Balance']);
+                }
+                $old_from->increment('balance', $item->amount);
+                $new_from->decrement('balance', $request->get('amount'));
+                $item->from = $request->get('account');
+            }
+
+            if($item->to != $request->get('target')){
+                $old_target = $item->target;
+                $new_target = Account::find($request->get('target'));
+                if($old_target->balance < $item->amount){
+                    return back()->withErrors(['insufficient' => 'Insufficient Balance']);
+                }
+                $new_target->increment('balance', $request->get('amount'));
+                $old_target->decrement('balance', $item->amount);
+                $item->to = $request->get('target');
+            }
+        }
+
+        if($request->file('attachment') != null){
+            $image = request()->file('attachment');
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('uploaded/transaction_attachments'), $imageName);
+            $item->attachment = 'uploaded/transaction_attachments/'.$imageName;
+        }
+
         $item->save();
-        return back()->with('success', 'Updated Successfully');
+
+        return redirect(route('transaction.index'))->with('success', 'Updated Successfully');
+
     }
 
     public function delete($id){
