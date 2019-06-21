@@ -89,7 +89,7 @@
                                         <span class="input-group-prepend">
                                             <span class="input-group-text"><i class="icon-calendar"></i></span>
                                         </span>
-                                        <input type="text" name="timestamp" class="form-control pickadate" placeholder="{{__('page.date')}}">
+                                        <input type="text" name="timestamp" class="form-control pickadate" value="{{date('Y-m-d')}}" placeholder="{{__('page.date')}}">
                                     </div>
                                 </div>
 
@@ -167,7 +167,7 @@
                                         <span class="input-group-prepend">
                                             <span class="input-group-text"><i class="icon-calendar"></i></span>
                                         </span>
-                                        <input type="text" name="timestamp" class="form-control pickadate" placeholder="{{__('page.date')}}">
+                                        <input type="text" name="timestamp" class="form-control pickadate" value="{{date('Y-m-d')}}" placeholder="{{__('page.date')}}">
                                     </div>
                                 </div>
 
@@ -259,7 +259,7 @@
                                         <span class="input-group-prepend">
                                             <span class="input-group-text"><i class="icon-calendar"></i></span>
                                         </span>
-                                        <input type="text" name="timestamp" class="form-control pickadate" placeholder="{{__('page.date')}}">
+                                        <input type="text" name="timestamp" class="form-control pickadate" value="{{date('Y-m-d')}}" placeholder="{{__('page.date')}}">
                                     </div>
                                 </div>
 

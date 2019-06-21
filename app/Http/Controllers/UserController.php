@@ -63,7 +63,7 @@ class UserController extends Controller
             $user->picture = 'images/profile_pictures/'.$imageName;
         }
         $user->update();
-        return back()->with("success", "Updated Profile Successfully.");
+        return back()->with("success", __('page.updated_successfully'));
     }
 
     public function edituser(Request $request){
@@ -79,7 +79,7 @@ class UserController extends Controller
             $user->password = Hash::make($request->get('password'));
         }
         $user->save();
-        return response()->json("success");
+        return response()->json('success');
     }
 
     public function create(Request $request){
@@ -102,7 +102,7 @@ class UserController extends Controller
     public function delete($id){
         $user = User::find($id);
         $user->delete();
-        return back()->with("success", "Deleted Successfully!");
+        return back()->with("success", __('page.deleted_successfully'));
     }
 
 }

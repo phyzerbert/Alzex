@@ -47,7 +47,50 @@
 
         @yield('content')  
 
-    </div>
-    @yield('script')
+	</div>
+	<script src="{{asset('master/global_assets/js/plugins/notifications/pnotify.min.js')}}"></script>
+	@yield('script')
+	<script>
+
+		var notification = '<?php echo session()->get("success"); ?>';
+
+		if(notification != ''){
+
+			new PNotify({
+                title: 'Success',
+                text: notification,
+                icon: 'icon-checkmark3',
+                addclass: 'bg-success border-success',
+                type: 'success'
+            });
+
+		}
+
+		var errors_string = '<?php echo json_encode($errors->all()); ?>';
+
+		errors_string=errors_string.replace("[","").replace("]","").replace(/\"/g,"");
+
+		var errors = errors_string.split(",");
+
+		if (errors_string != "") {
+
+			for (let i = 0; i < errors.length; i++) {
+
+				const element = errors[i];
+
+				new PNotify({
+					title: 'Error',
+					text: element,
+					icon: 'icon-blocked',
+                	addclass: 'bg-danger border-danger',
+					type: 'error'
+				});       
+
+			} 
+
+		}
+
+
+	</script>
 </body>
 </html>

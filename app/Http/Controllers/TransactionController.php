@@ -205,48 +205,71 @@ class TransactionController extends Controller
         $item->timestamp = $request->get('timestamp');
         if($type == 1){
             // dd($request->all());
+            $old_account = $item->account;
             if($item->from != $request->get('account')){
                 $new_account = Account::find($request->get('account'));
-                $old_account = $item->account;
                 if($new_account->balance < $request->get('amount')){
-                    return back()->withErrors(['insufficient' => 'Insufficient Balance']);
+                    return back()->withErrors(['insufficient' => __('page.insufficient_balance')]);
                 }
                 $old_account->increment('balance', $item->amount);
                 $new_account->decrement('balance', $request->get('amount'));
                 $item->from = $request->get('account');
+            }else if($item->amount != $request->get('amount')){
+                if($item->amount < $request->get('amount')){
+                    $difference = $request->get('amount') - $item->amount;
+                    if($old_account->balance < $difference){
+                        return back()->withErrors(['insufficient' => __('page.insufficient_balance')]);
+                    }
+                    $old_account->decrement('balance', $difference);
+                    $item->amount += $difference;
+                }else if($item->amount > $request->get('amount')){
+                    $difference = $item->amount - $request->get('amount');
+                    $old_account->increment('balance', $difference);
+                    $item->amount -= $difference;
+                }
             }
         }else if($type == 2){
+            $old_target = $item->target;
             if($item->to != $request->get('account')){
-                $old_target = $item->target;
                 $new_target = Account::find($request->get('account'));
                 if($old_target->balance < $item->amount){
-                    return back()->withErrors(['insufficient' => 'Insufficient Balance']);
+                    return back()->withErrors(['insufficient' => __('page.insufficient_balance')]);
                 }
                 $new_target->increment('balance', $request->get('amount'));
                 $old_target->decrement('balance', $item->amount);
                 $item->to = $request->get('account');
+            }else if($item->amount != $request->get('amount')){
+                $item->amount = $request->get('amount');
             }
         }else if($type == 3){
+            $old_from = $item->account;
             if($item->from != $request->get('account')){
-                $old_from = $item->account;
                 $new_from = Account::find($request->get('account'));
                 if($new_from->balance < $request->get('amount')){
-                    return back()->withErrors(['insufficient' => 'Insufficient Balance']);
+                    return back()->withErrors(['insufficient' => __('page.insufficient_balance')]);
                 }
                 $old_from->increment('balance', $item->amount);
                 $new_from->decrement('balance', $request->get('amount'));
                 $item->from = $request->get('account');
             }
 
+            $old_target = $item->target;
             if($item->to != $request->get('target')){
-                $old_target = $item->target;
                 $new_target = Account::find($request->get('target'));
                 if($old_target->balance < $item->amount){
-                    return back()->withErrors(['insufficient' => 'Insufficient Balance']);
+                    return back()->withErrors(['insufficient' => __('page.insufficient_balance')]);
                 }
                 $new_target->increment('balance', $request->get('amount'));
                 $old_target->decrement('balance', $item->amount);
                 $item->to = $request->get('target');
+            }
+
+            if($item->to == $request->get('target') && $item->from == $request->get('account') && $item->amount != $request->get('amount')){
+                $old_account->increment('balance', $item->amount);
+                $old_target->decrement('balance', $item->amount);
+                $old_account->decrement('balance', $request->get('amount'));
+                $old_target->increment('balance', $request->get('amount'));
+                $item->amount = $request->get('amount');
             }
         }
 
@@ -259,7 +282,7 @@ class TransactionController extends Controller
 
         $item->save();
 
-        return redirect(route('transaction.index'))->with('success', 'Updated Successfully');
+        return redirect(route('transaction.index'))->with('success', __('page.updated_successfully'));
 
     }
 

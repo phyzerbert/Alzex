@@ -51,6 +51,13 @@ return [
     'comment' => 'Comment',
     'are_you_sure' => 'Are you sure?',
     'accepted_formats_image' => 'Accepted formats: gif, png, jpg. Max file size 2Mb.',
+    'success' => 'Success',
+    'error' => 'Error',
+    'created_successfully' => 'Created Successfully',
+    'updated_successfully' => 'Updated Successfully',
+    'deleted_successfully' => 'Deleted Successfully',
+    'insufficient' => 'Insufficient',
+    'insufficient_balance' => 'Insufficient Balance',
 
     // ******** Dashboard ********
     'overview' => 'Overview',
