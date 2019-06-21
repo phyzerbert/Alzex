@@ -53,7 +53,9 @@ return [
     'accepted_formats_image' => 'Accepted formats: gif, png, jpg. Max file size 2Mb.',
 
     // ******** Dashboard ********
-
+    'overview' => 'Overview',
+    'user_overview' => 'User Overview',
+    'category_overview' => 'Category Overview',
 
     // ******** Transaction ********
     'select_type' => 'Select a type',

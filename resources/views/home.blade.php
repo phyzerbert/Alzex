@@ -44,12 +44,12 @@
         <div class="content">
             <div class="card">
                 <div class="card-header header-elements-inline">
-                    <h5 class="card-title">Overview</h5>
+                    <h5 class="card-title">{{__('page.overview')}}</h5>
                     <div class="form-search">
                         <form action="" class="form-inline" method="post">
                             @csrf
-                            <input type="text" name="period" id="overview-period" class="form-control form-control-sm period" value="{{$period}}" placeholder="Timestamp" autocomplete="off" style="min-width:200px;">
-                            <button type="submit" class="btn btn-primary btn-sm ml-2"><i class="icon-search4"></i> Search</button>
+                            <input type="text" name="period" id="overview-period" class="form-control form-control-sm period" value="{{$period}}" placeholder="{{__('page.timestamp')}}" autocomplete="off" style="min-width:200px;">
+                            <button type="submit" class="btn btn-primary btn-sm ml-2"><i class="icon-search4"></i> {{__('page.search')}}</button>
                         </form>
                     </div>
                     <div class="header-elements">
@@ -98,7 +98,7 @@
             {{-- User Chart --}}
             <div class="card">
                 <div class="card-header header-elements-inline">
-                    <h5 class="card-title">Users Overview</h5>
+                    <h5 class="card-title">{{__('page.user_overview')}}</h5>
                     <div class="header-elements">
                         <div class="list-icons">
                             <a class="list-icons-item" data-action="collapse"></a>
@@ -128,7 +128,7 @@
             {{-- Category Chart --}}
             <div class="card">
                 <div class="card-header header-elements-inline">
-                    <h5 class="card-title">Categories Overview</h5>
+                    <h5 class="card-title">{{__('page.overview')}}</h5>
                     <div class="header-elements">
                         <div class="list-icons">
                             <a class="list-icons-item" data-action="collapse"></a>
