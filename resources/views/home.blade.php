@@ -128,7 +128,7 @@
             {{-- Category Chart --}}
             <div class="card">
                 <div class="card-header header-elements-inline">
-                    <h5 class="card-title">{{__('page.overview')}}</h5>
+                    <h5 class="card-title">{{__('page.category_overview')}}</h5>
                     <div class="header-elements">
                         <div class="list-icons">
                             <a class="list-icons-item" data-action="collapse"></a>
@@ -159,7 +159,7 @@
             {{-- Account Chart --}}
             <div class="card">
                     <div class="card-header header-elements-inline">
-                        <h5 class="card-title">{{__('page.overview')}}</h5>
+                        <h5 class="card-title">{{__('page.account_overview')}}</h5>
                         <div class="header-elements">
                             <div class="list-icons">
                                 <a class="list-icons-item" data-action="collapse"></a>

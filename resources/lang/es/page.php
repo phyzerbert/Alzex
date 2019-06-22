@@ -64,7 +64,8 @@ return [
     // ******** Dashboard ********
     'overview' => 'Visión General',
     'user_overview' => 'Visión General del Usuario',
-    'category_overview' => 'Descripción de la Categorías',
+    'category_overview' => 'Visión General de la Categorías',
+    'account_overview' => 'Visión General de cuenta',
 
     // ******** Transaction ********
     'select_type' => 'Seleccione un Tipo',
