@@ -5,7 +5,7 @@
         </a>
     </div>
 
-    <div class="d-md-none">
+    <div class="d-md1-none" id="mobile_sidebar_control">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-mobile">
             <i class="icon-tree5"></i>
         </button>
