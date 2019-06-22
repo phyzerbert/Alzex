@@ -1,3 +1,7 @@
+table.table-hover tr:hover{
+    background-color: #fef583!important;
+}
+
 @media (min-width: 813px){
     .d-md1-none{
         display: none !important;
