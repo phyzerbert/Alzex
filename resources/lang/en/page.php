@@ -34,6 +34,7 @@ return [
     'expense' => 'Expense',
     'incoming' => 'Incoming',
     'transfer' => 'Transfer',
+    'balance' => 'Balance',
     'search' => 'Search',
     'reset' => 'Reset',
     'action' => 'Action',

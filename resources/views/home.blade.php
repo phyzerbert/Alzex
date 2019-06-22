@@ -21,7 +21,7 @@
                                 @foreach ($accountgroups as $accountgroup)
                                     <div class="dropdown-header dropdown-header-highlight">{{$accountgroup->name}}</div>
                                     @foreach ($accountgroup->accounts as $item)                                         
-                                        <div class="dropdown-item"><div class="flex-grow-1">{{$item->name}}</div><div class="">{{$item->balance}}</div></div>
+                                        <div class="dropdown-item"><div class="flex-grow-1">{{$item->name}}</div><div class="">{{number_format($item->balance)}}</div></div>
                                     @endforeach
                                     <div class="dropdown-divider"></div>
                                 @endforeach
@@ -202,6 +202,11 @@
 <script src="{{asset('master/global_assets/js/plugins/daterangepicker/jquery.daterangepicker.min.js')}}"></script>
     <script src="{{asset('master/global_assets/js/plugins/visualization/echarts/echarts.min.js')}}"></script>
     <script>
+        var legend_array = {!! json_encode([__('page.expense'), __('page.incoming')]) !!};
+        var expense = "{{__('page.expense')}}";
+        var incoming = "{{__('page.incoming')}}";
+        var balance = "{{__('page.balance')}}";
+        console.log(legend_array);
         var Chart_overview = function() {
 
             var dashboard_chart = function() {
@@ -240,9 +245,9 @@
                             containLabel: true
                         },
 
-                        // Add legend
+                        
                         legend: {
-                            data: ['Expense', 'Incoming'],
+                            data: [expense, incoming],
                             itemHeight: 8,
                             itemGap: 20
                         },
@@ -307,7 +312,7 @@
                         // Add series
                         series: [
                             {
-                                name: 'Expense',
+                                name: expense,
                                 type: 'line',
                                 data: {!! json_encode($expense_array) !!},
                                 areaStyle: {
@@ -324,7 +329,7 @@
                                 }
                             },
                             {
-                                name: 'Incoming',
+                                name: incoming,
                                 type: 'line',
                                 smooth: true,
                                 symbolSize: 7,
@@ -415,7 +420,7 @@
 
                         // Add legend
                         legend: {
-                            data: ['Expense', 'Incoming'],
+                            data: [expense, incoming],
                             itemHeight: 8,
                             itemGap: 20,
                             textStyle: {
@@ -482,7 +487,7 @@
                         // Add series
                         series: [
                             {
-                                name: 'Expense',
+                                name: expense,
                                 type: 'bar',
                                 data: {!! json_encode($user_expense_array) !!},
                                 itemStyle: {
@@ -501,7 +506,7 @@
                                 }
                             },
                             {
-                                name: 'Incoming',
+                                name: incoming,
                                 type: 'bar',
                                 data: {!! json_encode($user_incoming_array) !!},
                                 itemStyle: {
@@ -594,7 +599,7 @@
 
                         // Add legend
                         legend: {
-                            data: ['Expense', 'Incoming'],
+                            data: [expense, incoming],
                             itemHeight: 8,
                             itemGap: 20,
                             textStyle: {
@@ -661,7 +666,7 @@
                         // Add series
                         series: [
                             {
-                                name: 'Expense',
+                                name: expense,
                                 type: 'bar',
                                 data: {!! json_encode($category_expense_array) !!},
                                 itemStyle: {
@@ -680,7 +685,7 @@
                                 }
                             },
                             {
-                                name: 'Incoming',
+                                name: incoming,
                                 type: 'bar',
                                 data: {!! json_encode($category_incoming_array) !!},
                                 itemStyle: {
@@ -773,7 +778,7 @@
 
                         // Add legend
                         legend: {
-                            data: ['Expense', 'Incoming', 'Balance'],
+                            data: [expense, incoming, balance],
                             itemHeight: 8,
                             itemGap: 20,
                             textStyle: {
@@ -840,7 +845,7 @@
                         // Add series
                         series: [
                             {
-                                name: 'Expense',
+                                name: expense,
                                 type: 'bar',
                                 data: {!! json_encode($account_expense_array) !!},
                                 itemStyle: {
@@ -859,7 +864,7 @@
                                 }
                             },
                             {
-                                name: 'Incoming',
+                                name: incoming,
                                 type: 'bar',
                                 data: {!! json_encode($account_incoming_array) !!},
                                 itemStyle: {
@@ -878,7 +883,7 @@
                                 }
                             },
                             {
-                                name: 'Balance',
+                                name: balance,
                                 type: 'bar',
                                 data: {!! json_encode($account_balance_array) !!},
                                 itemStyle: {

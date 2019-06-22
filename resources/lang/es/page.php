@@ -35,6 +35,7 @@ return [
     'expense' => 'Gasto',
     'incoming' => 'Ingreso',
     'transfer' => 'Transferencia',
+    'balance' => 'Equilibrar',
     'search' => 'Busqueda',
     'reset' => 'Reiniciar',
     'action' => 'Action',
