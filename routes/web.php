@@ -49,6 +49,7 @@ Route::get('/accountgroup/delete/{id}', 'AccountController@delete_group')->name(
 
 
 Route::any('/transaction/index', 'TransactionController@index')->name('transaction.index');
+Route::any('/transaction/daily', 'TransactionController@daily')->name('transaction.daily');
 Route::get('/transaction/create', 'TransactionController@create')->name('transaction.create');
 Route::post('/transaction/expense', 'TransactionController@expense')->name('transaction.expense');
 Route::post('/transaction/incoming', 'TransactionController@incoming')->name('transaction.incoming');

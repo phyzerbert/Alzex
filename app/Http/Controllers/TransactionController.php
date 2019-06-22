@@ -74,6 +74,53 @@ class TransactionController extends Controller
         return view('transaction.index', compact('data', 'expenses', 'incomes', 'categories', 'accountgroups', 'users', 'type', 'user', 'category', 'account', 'period', 'pagesize'));
     }
 
+    public function daily(Request $request)
+    {
+        config(['site.page' => 'transaction_daily']);
+        $categories = Category::all();
+        $accountgroups = Accountgroup::all();
+        $users = User::all();
+        
+        $mod = new Transaction();
+        $mod1 = new Transaction();
+        $category = $account = $user = $type = $period = '';
+        $period = date('Y-m-d');
+
+        if ($request->get('type') != ""){
+            $type = $request->get('type');
+            $mod = $mod->where('type', $type);
+            $mod1 = $mod1->where('type', $type);
+        }
+        if ($request->get('user') != ""){
+            $user = $request->get('user');
+            $users = User::where('name', 'LIKE', "%$user%")->pluck('id');
+            $mod = $mod->whereIn('user_id', $users);
+            $mod1 = $mod1->whereIn('user_id', $users);
+        }
+        if ($request->get('category') != ""){
+            $category = $request->get('category');
+            $mod = $mod->where('category_id', $category);
+            $mod1 = $mod1->where('category_id', $category);
+        }
+        if ($request->get('account') != ""){
+            $account = $request->get('account');
+            $mod = $mod->where('from', $account)->orWhere('to', $account);
+            $mod1 = $mod1->where('from', $account)->orWhere('to', $account);
+        }
+        if ($request->get('period') != ""){   
+            $period = $request->get('period');
+        }
+        $mod = $mod->whereDate('timestamp', $period);
+        $mod1 = $mod1->whereDate('timestamp', $period);
+
+        $pagesize = $request->session()->get('pagesize');
+        if(!$pagesize){$pagesize = 15;}
+        $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
+        $expenses = $mod->where('type', 1)->sum('amount');
+        $incomes = $mod1->where('type', 2)->sum('amount');
+        return view('transaction.daily', compact('data', 'expenses', 'incomes', 'categories', 'accountgroups', 'users', 'type', 'user', 'category', 'account', 'period', 'pagesize'));
+    }
+
     public function create(Request $request){
         $users = User::all();
         $categories = Category::all();

@@ -24,6 +24,7 @@ return [
     // ********  Sidebar  ********
     'dashboard' => 'Tablero',
     'transaction' => 'Transacciónes',
+    'daily_transaction' => 'Transacciónes Diaria',
     'user' => 'Usuarios',
     'category' => 'Categorías',
     'account' => 'Cuentas',

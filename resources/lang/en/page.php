@@ -24,6 +24,7 @@ return [
     // ********  Sidebar  ********
     'dashboard' => 'Dashboard',
     'transaction' => 'Transaction',
+    'daily_transaction' => 'Daily Transaction',
     'user' => 'User',
     'category' => 'Category',
     'account' => 'Account',
