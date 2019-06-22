@@ -90,11 +90,11 @@
                                         </td>
                                         <td class="amount">
                                             @if ($item->type == 1)
-                                                <span style="color:red">-{{ $item->amount }}</span>
+                                                <span style="color:red">-{{ number_format($item->amount) }}</span>
                                             @elseif($item->type == 2)
-                                                <span style="color:green">{{ $item->amount }}</span>
+                                                <span style="color:green">{{ number_format($item->amount) }}</span>
                                             @else
-                                                {{ $item->amount }}
+                                                {{ number_format($item->amount) }}
                                             @endif
                                         </td>
                                         <td class="from">@isset($item->account->name){{$item->account->name}}@endisset</td>
@@ -118,9 +118,9 @@
                             <tfoot class="text-danger text-center">
                                 <tr>
                                     <td colspan="2">{{__('page.total')}}</td>
-                                    <td colspan="3">{{__('page.expenses')}} : -{{$expenses}}</td>
-                                    <td colspan="3">{{__('page.incomes')}} : {{$incomes}}</td>
-                                    <td colspan="2">{{__('page.profit')}} : {{$incomes - $expenses}}</td>
+                                    <td colspan="3">{{__('page.expenses')}} : -{{number_format($expenses)}}</td>
+                                    <td colspan="3">{{__('page.incomes')}} : {{number_format($incomes)}}</td>
+                                    <td colspan="2">{{__('page.profit')}} : {{number_format($incomes - $expenses)}}</td>
                                 </tr>
                             </tfoot>
                         </table>
