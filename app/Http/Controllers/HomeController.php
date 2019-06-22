@@ -36,7 +36,6 @@ class HomeController extends Controller
         $search_accounts = Account::pluck('id')->toArray();
         
         $from = date('Y-m-d', strtotime(Transaction::orderBy('timestamp')->first()->timestamp));
-        dump($from);
         // $from = Carbon::now()->startOfMonth()->format('Y-m-d');
         $to = date('Y-m-d');
         $period = '';        
