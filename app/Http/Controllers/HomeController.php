@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use App\User;
 use App\Models\Transaction;
 use App\Models\Category;
+use App\Models\Account;
 
 class HomeController extends Controller
 {
@@ -32,6 +33,7 @@ class HomeController extends Controller
         config(['site.page' => 'home']);
         $search_users = User::pluck('id')->toArray();
         $search_categories = Category::pluck('id')->toArray();
+        $search_accounts = Account::pluck('id')->toArray();
         
         $from = Carbon::now()->startOfMonth()->format('Y-m-d');
         $to = Carbon::now()->endOfMonth()->format('Y-m-d');
@@ -41,7 +43,7 @@ class HomeController extends Controller
             $from = substr($period, 0, 10);
             $to = substr($period, 14, 10);
         }
-        return view('home', compact('period', 'search_users', 'search_categories', 'from', 'to'));
+        return view('home', compact('period', 'search_users', 'search_categories', 'search_accounts', 'from', 'to'));
     } 
     
     public function set_pagesize(Request $request){
