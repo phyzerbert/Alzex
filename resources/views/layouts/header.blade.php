@@ -37,7 +37,7 @@
                             <img src="{{asset('images/lang/es.png')}}" width="30px">&nbsp;&nbsp;Spanish
                             @break
                         @default
-                            <img src="{{asset('images/lang/en.png')}}" width="30px">&nbsp;&nbsp;English
+                            <img src="{{asset('images/lang/es.png')}}" width="30px">&nbsp;&nbsp;Spanish
                     @endswitch
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
