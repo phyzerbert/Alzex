@@ -180,11 +180,8 @@
                 mouse: true,
                 keyboard: true,
                 toolbar: true,
-                rotateToolbar: true
             });
-
             $("#attachModal").modal();
-
         });
         $("#btn-reset").click(function(){
             $("#search_user").val('');

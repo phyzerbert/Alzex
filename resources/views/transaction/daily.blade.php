@@ -1,6 +1,15 @@
 @extends('layouts.master')
 @section('style')
-    {{-- <link rel="stylesheet" href="{{asset('master/global_assets/js/plugins/daterangepicker/daterangepicker.css')}}"> --}}
+    <link rel="stylesheet" href="{{asset('master/global_assets/js/plugins/imageviewer/css/jquery.verySimpleImageViewer.css')}}">
+    <style>
+        #image_preview {
+            max-width: 600px;
+            height: 600px;
+        }
+        .image_viewer_inner_container {
+            width: 100% !important;
+        }
+    </style>
 @endsection
 @section('content')
     @php
@@ -141,7 +150,8 @@
     <div class="modal fade" id="attachModal">
         <div class="modal-dialog" style="margin-top:17vh">
             <div class="modal-content">
-                <img src="" id="attachment" width="100%" height="600" alt="">
+                <div id="image_preview"></div>
+                {{-- <img src="" id="attachment" width="100%" height="600" alt=""> --}}
             </div>
         </div>
     </div>
@@ -152,6 +162,7 @@
 {{-- <script src="{{asset('master/global_assets/js/plugins/daterangepicker/jquery.daterangepicker.min.js')}}"></script> --}}
 <script src="{{asset('master/global_assets/js/plugins/ui/moment/moment.min.js')}}"></script>
 <script src="{{asset('master/global_assets/js/plugins/pickers/daterangepicker.js')}}"></script>
+<script src="{{asset('master/global_assets/js/plugins/imageviewer/js/jquery.verySimpleImageViewer.min.js')}}"></script>
 <script>
     $(document).ready(function () {
         $('#search_period').daterangepicker({ 
@@ -187,6 +198,26 @@
         $("#next_date").click(function(){
             $('#change_date').val('2');
             $("#searchForm").submit();
+        });
+
+
+        $(".btn-attach").click(function(e){
+            e.preventDefault();
+            let path = '{{asset("/")}}' + $(this).data('value');
+            // $("#attachment").attr('src', path);
+            $("#image_preview").html('')
+            $("#image_preview").verySimpleImageViewer({
+                imageSource: path,
+                frame: ['100%', '100%'],
+                maxZoom: '900%',
+                zoomFactor: '10%',
+                mouse: true,
+                keyboard: true,
+                toolbar: true,
+            });
+
+            $("#attachModal").modal();
+
         });
     });
 </script>
