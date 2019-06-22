@@ -1,0 +1,6 @@
+@media (min-width: 813px){
+    .sidebar-expand-md:not(.sidebar-component) {
+        position: static;
+        transition: none;
+    }
+}
