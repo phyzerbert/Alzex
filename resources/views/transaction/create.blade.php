@@ -298,7 +298,7 @@
 @section('script')
     <script src="{{asset('master/global_assets/js/plugins/forms/selects/select2.min.js')}}"></script>
     <script src="{{asset('master/global_assets/js/plugins/forms/styling/uniform.min.js')}}"></script>
-    	<!-- Theme JS files -->
+    <!-- Theme JS files -->
 	<script src="{{asset('master/global_assets/js/plugins/ui/moment/moment.min.js')}}"></script>
 	<script src="{{asset('master/global_assets/js/plugins/pickers/daterangepicker.js')}}"></script>
 	<script src="{{asset('master/global_assets/js/plugins/pickers/anytime.min.js')}}"></script>
@@ -315,25 +315,9 @@
                     format: 'YYYY-MM-DD'
                 }
             });
-            // var $input_date = $('input.pickadate').pickadate({
-            //     editable: true,
-            //     format: 'yyyy-mm-dd',
-            //     today: false,
-            //     clear: false,
-            //     close: false,
-            //     onClose: function() {
-            //         $('.datepicker').focus();
-            //     }
-            // });
-            // var picker_date = $input_date.pickadate('picker');
-            // $input_date.on('click', function(event) {
-            //     if (picker_date.get('open')) {
-            //         picker_date.close();
-            //     } else {
-            //         picker_date.open();
-            //     }                        
-            //     event.stopPropagation();
-            // });
+
+            
+            
         });
     </script>
     
