@@ -26,12 +26,12 @@
                 <div class="header-elements d-flex">
                     <div class="d-flex justify-content-center">
                         <div class="btn-group justify-content-center">
-                            <a href="#" class="btn bg-primary-400 dropdown-toggle" data-toggle="dropdown"><i class="icon-wallet"></i>  Account Balance</a>
+                            <a href="#" class="btn bg-primary-400 dropdown-toggle" data-toggle="dropdown"><i class="icon-wallet"></i>  {{__('page.balance')}}</a>
                             <div class="dropdown-menu">
                                 @foreach ($accountgroups as $accountgroup)
                                     <div class="dropdown-header dropdown-header-highlight">{{$accountgroup->name}}</div>
                                     @foreach ($accountgroup->accounts as $item)                                         
-                                        <div class="dropdown-item"><div class="flex-grow-1">{{$item->name}}</div><div class="">{{$item->balance}}</div></div>
+                                        <div class="dropdown-item"><div class="flex-grow-1">{{$item->name}}</div><div class="">{{number_format($item->balance)}}</div></div>
                                     @endforeach
                                     <div class="dropdown-divider"></div>
                                 @endforeach

@@ -36,7 +36,7 @@ return [
     'expense' => 'Gasto',
     'incoming' => 'Ingreso',
     'transfer' => 'Transferencia',
-    'balance' => 'Equilibrar',
+    'balance' => 'Balance',
     'search' => 'Busqueda',
     'reset' => 'Reiniciar',
     'action' => 'Action',
