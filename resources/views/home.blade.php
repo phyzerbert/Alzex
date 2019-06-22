@@ -48,8 +48,15 @@
                     <div class="form-search">
                         <form action="" class="form-inline" method="post">
                             @csrf
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <span class="input-group-text"><i class="icon-calendar"></i></span>
+                                </span>
+                                <input type="text" name="spec_date" id="spec_date" class="form-control form-control-sm mr-2 spec_date" value="{{$spec_date}}" placeholder="{{__('page.date')}}" autocomplete="off">
+                            </div>
                             <input type="text" name="period" id="overview-period" class="form-control form-control-sm period" value="{{$period}}" placeholder="{{__('page.timestamp')}}" autocomplete="off" style="min-width:200px;">
                             <button type="submit" class="btn btn-primary btn-sm ml-2"><i class="icon-search4"></i> {{__('page.search')}}</button>
+                            <button type="button" id="btn-reset" class="btn btn-danger btn-sm ml-2"><i class="icon-eraser"></i> {{__('page.reset')}}</button>
                         </form>
                     </div>
                     <div class="header-elements">
@@ -932,10 +939,22 @@
             Chart_account.init();
         });
 
-    </script>
+    </script>    
+	<script src="{{asset('master/global_assets/js/plugins/pickers/pickadate/picker.js')}}"></script>
+	<script src="{{asset('master/global_assets/js/plugins/pickers/pickadate/picker.date.js')}}"></script>
     <script>
         $(document).ready(function(){
             $(".period").dateRangePicker();
+            $(".spec_date").pickadate({
+                format: 'yyyy-mm-dd',
+                today: false,
+                clear: false,
+                close: false,
+            });
+            $("#btn-reset").click(function(){
+                $(".period").val('');
+                $(".spec_date").val('');
+            })
         });
     </script>
 @endsection

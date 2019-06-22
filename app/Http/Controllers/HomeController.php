@@ -38,13 +38,16 @@ class HomeController extends Controller
         $from = date('Y-m-d', strtotime(Transaction::orderBy('timestamp')->first()->timestamp));
         // $from = Carbon::now()->startOfMonth()->format('Y-m-d');
         $to = date('Y-m-d');
-        $period = '';        
-        if ($request->get('period') != ""){   
+        $period = $spec_date = '';        
+        if ($request->get('spec_date') != ""){   
+            $spec_date = $request->get('spec_date');
+            $to = $spec_date;
+        }else if ($request->get('period') != ""){   
             $period = $request->get('period');
             $from = substr($period, 0, 10);
             $to = substr($period, 14, 10);
         }
-        return view('home', compact('period', 'search_users', 'search_categories', 'search_accounts', 'from', 'to'));
+        return view('home', compact('period', 'search_users', 'search_categories', 'search_accounts', 'from', 'to', 'spec_date'));
     } 
     
     public function set_pagesize(Request $request){
