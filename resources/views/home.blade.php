@@ -169,7 +169,7 @@
                         </div>
                     </div>
                     @php
-                        $account_key_array = $account_expense_array = $account_incoming_array = array();
+                        $account_key_array = $account_expense_array = $account_incoming_array = $account_balance_array = array();
                         for ($i=0; $i < count($search_accounts); $i++) { 
                             $item = \App\Models\Account::find($search_accounts[$i]);
                             array_push($account_key_array, $item->name);
@@ -177,6 +177,7 @@
                             $account_incoming = $item->incomings()->whereBetween('timestamp', [$from, $to])->sum('amount');
                             array_push($account_expense_array, $account_expense);
                             array_push($account_incoming_array, $account_incoming);
+                            array_push($account_balance_array, $account_incoming - $account_expense);
                         }
                     @endphp
     
@@ -366,7 +367,6 @@
         }();
 
         var Chart_user = function() {
-
             var _columnsWaterfallsExamples = function() {
                 if (typeof echarts == 'undefined') {
                     console.warn('Warning - echarts.min.js is not loaded.');
@@ -766,7 +766,7 @@
 
                         // Add legend
                         legend: {
-                            data: ['Expense', 'Incoming'],
+                            data: ['Expense', 'Incoming', 'Balance'],
                             itemHeight: 8,
                             itemGap: 20,
                             textStyle: {
@@ -855,6 +855,25 @@
                                 name: 'Incoming',
                                 type: 'bar',
                                 data: {!! json_encode($account_incoming_array) !!},
+                                itemStyle: {
+                                    normal: {
+                                        label: {
+                                            show: true,
+                                            position: 'top',
+                                            textStyle: {
+                                                fontWeight: 500
+                                            }
+                                        }
+                                    }
+                                },
+                                markLine: {
+                                    data: [{type: 'average', name: 'Average'}]
+                                }
+                            },
+                            {
+                                name: 'Balance',
+                                type: 'bar',
+                                data: {!! json_encode($account_balance_array) !!},
                                 itemStyle: {
                                     normal: {
                                         label: {
