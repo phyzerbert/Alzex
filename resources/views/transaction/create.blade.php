@@ -259,7 +259,7 @@
                                         <span class="input-group-prepend">
                                             <span class="input-group-text"><i class="icon-calendar"></i></span>
                                         </span>
-                                        <input type="text" name="timestamp" class="form-control pickadate" value="{{date('Y-m-d')}}" placeholder="{{__('page.date')}}">
+                                        <input type="text" name="timestamp" class="form-control pickadate pickadate-editable" value="{{date('Y-m-d')}}" placeholder="{{__('page.date')}}">
                                     </div>
                                 </div>
 
@@ -309,12 +309,31 @@
 	<script src="{{asset('master/global_assets/js/plugins/notifications/jgrowl.min.js')}}"></script>
     <script>
         $(document).ready(function () {
-            $("input.pickadate").pickadate({
-                format: 'yyyy-mm-dd',
-                today: false,
-                clear: false,
-                close: false,
+            $('input.pickadate').daterangepicker({ 
+                singleDatePicker: true,
+                locale: {
+                    format: 'YYYY-MM-DD'
+                }
             });
+            // var $input_date = $('input.pickadate').pickadate({
+            //     editable: true,
+            //     format: 'yyyy-mm-dd',
+            //     today: false,
+            //     clear: false,
+            //     close: false,
+            //     onClose: function() {
+            //         $('.datepicker').focus();
+            //     }
+            // });
+            // var picker_date = $input_date.pickadate('picker');
+            // $input_date.on('click', function(event) {
+            //     if (picker_date.get('open')) {
+            //         picker_date.close();
+            //     } else {
+            //         picker_date.open();
+            //     }                        
+            //     event.stopPropagation();
+            // });
         });
     </script>
     
