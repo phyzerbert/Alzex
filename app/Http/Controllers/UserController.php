@@ -28,7 +28,7 @@ class UserController extends Controller
     public function index()
     {
         config(['site.page' => 'user']);
-        $data = User::paginate(10);
+        $data = User::paginate(15);
         return view('admin.users', compact('data'));
     }
 
