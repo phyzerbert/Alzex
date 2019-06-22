@@ -70,7 +70,7 @@ class TransactionController extends Controller
         if(!$pagesize){$pagesize = 15;}
         $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
         $expenses = $mod->where('type', 1)->sum('amount');
-        $incomes = $mod->where('type', 2)->sum('amount');
+        $incomes = $mod1->where('type', 2)->sum('amount');
         return view('transaction.index', compact('data', 'expenses', 'incomes', 'categories', 'accountgroups', 'users', 'type', 'user', 'category', 'account', 'period', 'pagesize'));
     }
 
