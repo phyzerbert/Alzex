@@ -68,7 +68,7 @@ class TransactionController extends Controller
 
         $pagesize = $request->session()->get('pagesize');
         if(!$pagesize){$pagesize = 15;}
-        $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
+        $data = $mod->orderBy('timestamp', 'desc')->paginate($pagesize);
         $expenses = $mod->where('type', 1)->sum('amount');
         $incomes = $mod1->where('type', 2)->sum('amount');
         return view('transaction.index', compact('data', 'expenses', 'incomes', 'categories', 'accountgroups', 'users', 'type', 'user', 'category', 'account', 'period', 'pagesize'));
@@ -83,7 +83,7 @@ class TransactionController extends Controller
         
         $mod = new Transaction();
         $mod1 = new Transaction();
-        $category = $account = $user = $type = $period = '';
+        $category = $account = $user = $type = $period = $change_date = '';
         $period = date('Y-m-d');
 
         if ($request->get('type') != ""){
@@ -110,6 +110,15 @@ class TransactionController extends Controller
         if ($request->get('period') != ""){   
             $period = $request->get('period');
         }
+        if($request->get('change_date') != ""){
+            $change_date = $request->get('change_date');
+            if($change_date == "1"){
+                $period = date('Y-m-d', strtotime($period .' -1 day'));
+            }else if($change_date == "2"){
+                $period = date('Y-m-d', strtotime($period .' +1 day'));
+            }
+        }
+        
         $mod = $mod->whereDate('timestamp', $period);
         $mod1 = $mod1->whereDate('timestamp', $period);
 

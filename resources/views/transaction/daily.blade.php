@@ -179,6 +179,15 @@
         $("#pagesize").change(function(){
             $("#pagesize_form").submit();
         })
+
+        $("#prev_date").click(function(){
+            $('#change_date').val('1');
+            $("#searchForm").submit();
+        });
+        $("#next_date").click(function(){
+            $('#change_date').val('2');
+            $("#searchForm").submit();
+        });
     });
 </script>
 @endsection
