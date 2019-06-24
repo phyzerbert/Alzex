@@ -34,8 +34,13 @@ class HomeController extends Controller
         $search_users = User::pluck('id')->toArray();
         $search_categories = Category::pluck('id')->toArray();
         $search_accounts = Account::pluck('id')->toArray();
+        $first_transaction = Transaction::orderBy('timestamp')->first();
+        if($first_transaction){
+            $from = date('Y-m-d', strtotime($first_transaction->timestamp));
+        }else{
+            $from = date('Y-m-d');
+        }
         
-        $from = date('Y-m-d', strtotime(Transaction::orderBy('timestamp')->first()->timestamp));
         // $from = Carbon::now()->startOfMonth()->format('Y-m-d');
         $to = date('Y-m-d');
         $period = $spec_date = '';        
