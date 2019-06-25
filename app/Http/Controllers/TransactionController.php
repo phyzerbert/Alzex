@@ -206,7 +206,6 @@ class TransactionController extends Controller
     public function transfer(Request $request){
         $request->validate([
             'user'=>'required',
-            'category'=>'required',
             'account'=>'required',
             'target'=>'required',
             'amount'=>'required',

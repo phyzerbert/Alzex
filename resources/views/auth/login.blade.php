@@ -21,7 +21,7 @@
                         @error('phone')
                             <span class="text-danger mt-2" role="alert">
                                 <strong>
-                                    @if ($verify_messages[$message])
+                                    @if (isset($verify_messages[$message]))
                                         {{ $verify_messages[$message] }}
                                     @else
                                         {{__('page.invalid_verification_request')}}

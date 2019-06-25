@@ -27,6 +27,9 @@
                         <div class="btn-group justify-content-center">
                             <a href="#" class="btn bg-primary-400 dropdown-toggle" data-toggle="dropdown"><i class="icon-wallet"></i>  {{__('page.balance')}}</a>
                             <div class="dropdown-menu">
+                                @php
+                                    $balance = \App\Models\Account::sum('balance');
+                                @endphp
                                 @foreach ($accountgroups as $accountgroup)
                                     <div class="dropdown-header dropdown-header-highlight">{{$accountgroup->name}}</div>
                                     @foreach ($accountgroup->accounts as $item)                                         
@@ -79,6 +82,7 @@
                                     <th>{{__('page.withdraw_from')}}</th>
                                     <th>{{__('page.target_account')}}</th>
                                     <th>{{__('page.user')}}</th>
+                                    <th>{{__('page.balance')}}</th>
                                     <th>{{__('page.type')}}</th>
                                     @if($role == 'admin')
                                         <th>{{__('page.action')}}</th>
@@ -87,10 +91,15 @@
                             </thead>
                             <tbody>                                
                                 @foreach ($data as $item)
+                                @php
+                                    $total_expenses = \App\Models\Transaction::where('type', 1)->where('timestamp', '<=', $item->timestamp)->sum('amount');
+                                    $total_incoming = \App\Models\Transaction::where('type', 2)->where('timestamp', '<=', $item->timestamp)->sum('amount');
+                                    $current_balance = $balance - $total_incoming + $total_expenses;
+                                @endphp
                                     <tr>
                                         <td>{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
                                         <td class="date">{{ date('Y-m-d', strtotime($item->timestamp))}}</td>
-                                        <td class="category">{{$item->category->name}}</td>
+                                        <td class="category">@isset($item->category->name){{$item->category->name}}@endif</td>
                                         <td class="description">
                                             {{$item->description}}
                                             @if ($item->attachment != "")
@@ -109,6 +118,7 @@
                                         <td class="from">@isset($item->account->name){{$item->account->name}}@endisset</td>
                                         <td class="to">@isset($item->target->name){{$item->target->name}}@endisset</td>
                                         <td class="user">{{$item->user->name}}</td>
+                                        <td class="balance">{{$current_balance}}</td>
                                         <td class="type">
                                             @php
                                                 $types = array(__('page.expense'), __('page.incoming'), __('page.transfer'));
